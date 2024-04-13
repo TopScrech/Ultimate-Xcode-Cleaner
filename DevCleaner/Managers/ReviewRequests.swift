@@ -1,12 +1,3 @@
-//
-//  ReviewRequests.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 31/08/2019.
-//  Copyright © 2019 One Minute Games. All rights reserved.
-//
-
-import Foundation
 import StoreKit
 
 public final class ReviewRequests {
@@ -14,7 +5,7 @@ public final class ReviewRequests {
     public static let shared = ReviewRequests()
     
     // MARK: Constants
-    private static let bytesNeededForReviewRequest: Int64 = 20 * 1024 * 1024 * 1024 // 20GB
+    private static let bytesNeededForReviewRequest: Int64 = 21474836480 // 20 * 1024 * 1024 * 1024 = 20GB
     private static let cleansNeededForReviewRequest = 3
     
     // MARK: Showing review request

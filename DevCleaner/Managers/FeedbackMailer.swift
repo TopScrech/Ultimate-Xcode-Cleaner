@@ -1,13 +1,3 @@
-//
-//  FeedbackMailer.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 03/06/2021.
-//  Copyright © 2021 One Minute Games. All rights reserved.
-//
-
-import Foundation
-import IOKit
 import Cocoa
 
 public final class FeedbackMailer {
@@ -18,14 +8,14 @@ public final class FeedbackMailer {
     private static let feedbackMailBase64 = "a29ucmFkLmtvbGFrb3dza2lAbWUuY29t" // base64 encoded to avoid spam bots
     
     // MARK: System profile
-
+    
     private func macModelIdentifier() -> String? {
         let service = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
         var modelIdentifier: String?
         if let modelData = IORegistryEntryCreateCFProperty(service, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? Data {
             modelIdentifier = String(data: modelData, encoding: .utf8)?.trimmingCharacters(in: .controlCharacters)
         }
-
+        
         IOObjectRelease(service)
         return modelIdentifier
     }
@@ -37,7 +27,7 @@ public final class FeedbackMailer {
         let appBuildNumber = (appBundleInfoDict?["CFBundleVersion"] as? String) ?? "-"
         let osVersionInfo = ProcessInfo.processInfo.operatingSystemVersionString
         let osInfoString = "macOS \(osVersionInfo)"
-        let macModelIdentifier = self.macModelIdentifier() ?? "-"
+        let macModelIdentifier = macModelIdentifier() ?? "-"
         let devFolderPath = Files.userDeveloperFolder.path
         let isDevFolderExists = XcodeFiles.isDeveloperFolderExists()
         let developerFolderReadable = fm.isReadableFile(atPath: devFolderPath)
@@ -91,7 +81,7 @@ public final class FeedbackMailer {
     }
     
     public func sendFeedback() {
-        self.sendEmail(subject: "DevCleaner Feedback", body: "", attachments: [])
+        sendEmail(subject: "DevCleaner Feedback", body: "", attachments: [])
     }
     
     public func reportAnIssue() {
@@ -101,7 +91,7 @@ public final class FeedbackMailer {
         if let oldLogPath = log.oldLogFilePath  { logAttachments.append(oldLogPath) }
         
         // some system informations
-        let systemProfile = self.prepareSystemProfileInfo()
+        let systemProfile = prepareSystemProfileInfo()
         
         let reportBody = """
             Write your report here
@@ -111,6 +101,6 @@ public final class FeedbackMailer {
             \(systemProfile)
             """
         
-        self.sendEmail(subject: "DevCleaner Issue Report", body: reportBody, attachments: logAttachments)
+        sendEmail(subject: "DevCleaner Issue Report", body: reportBody, attachments: logAttachments)
     }
 }

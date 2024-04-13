@@ -1,26 +1,5 @@
-//
-//  Profiler.swift
-//  DevCleaner
-//
-//  Created by Konrad Kolakowski on 04/08/2019.
-//  Copyright © 2019 One Minute Games. All rights reserved.
-//
-//  DevCleaner is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  DevCleaner is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
-
-import os
-import Foundation
 import QuartzCore
+import os
 
 public final class Profiler {
     private typealias ProfilerEntry = (name: StaticString, description: String, usingSignpost: Bool, start: CFTimeInterval)
@@ -42,25 +21,25 @@ public final class Profiler {
             os_signpost(.begin, dso: #dsohandle, log: Profiler.signpostLog, name: name, "%@", description as NSString)
         }
         
-        self.starts.append(entry)
+        starts.append(entry)
     }
     
     @discardableResult
-    public static func tock(noLog silent: Bool = false) -> CFTimeInterval {
+    public static func tock(noLog silent: Bool = false) -> TimeInterval {
         let tockTime = CACurrentMediaTime() // get time here to avoid any influence of "tock" function logic
-        var time = CFTimeInterval(0.0)
+        var time: TimeInterval = 0
         
-        if let lastEntry = self.starts.popLast() {
+        if let lastEntry = starts.popLast() {
             time = tockTime - lastEntry.start
             
             if !silent {
                 if lastEntry.usingSignpost {
-                    if #available(iOS 12.0, *) {
+                    if #available(iOS 12, *) {
                         os_signpost(.end, dso: #dsohandle, log: Profiler.signpostLog, name: lastEntry.name)
                     }
                 }
                 
-                let number = self.starts.count
+                let number = starts.count
                 let finalMessage: String
                 
                 if !lastEntry.name.description.isEmpty && !lastEntry.description.isEmpty {
@@ -71,7 +50,7 @@ public final class Profiler {
                     finalMessage = "[Profile: \(number)]"
                 }
                 
-                print(String(format: "\(finalMessage): %.f ms", time * 1000.0))
+                print(String(format: "\(finalMessage): %.f ms", time * 1000))
             }
         } else {
             print("Cannot stop profiling that haven't started yet!")

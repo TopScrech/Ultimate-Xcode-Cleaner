@@ -1,29 +1,9 @@
-//
-//  AppDelegate.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 11.02.2018.
-//  Copyright © 2018 One Minute Games. All rights reserved.
-//
-//  DevCleaner is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  DevCleaner is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
-
 import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: App configuration
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        return true
+        true
     }
     
     // MARK: App lifetime events
@@ -45,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             log.info("No reminder scheduled!")
         }
     }
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }

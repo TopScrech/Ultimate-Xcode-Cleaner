@@ -66,7 +66,7 @@
 		71012FA8230C8A9E00FDF8ED /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		71012FAB230C928600FDF8ED /* CmdLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdLine.swift; sourceTree = "<group>"; };
 		710C965327BBE09200A1DA6A /* AppleBuild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleBuild.swift; sourceTree = "<group>"; };
-		7110B48E2030F17B00EDBFA3 /* DevCleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevCleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7110B48E2030F17B00EDBFA3 /* Ultimate Xcode Cleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ultimate Xcode Cleaner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7110B4912030F17B00EDBFA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7110B4932030F17B00EDBFA3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7110B4952030F17B00EDBFA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 		7110B48F2030F17B00EDBFA3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7110B48E2030F17B00EDBFA3 /* DevCleaner.app */,
+				7110B48E2030F17B00EDBFA3 /* Ultimate Xcode Cleaner.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -343,9 +343,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7110B48D2030F17B00EDBFA3 /* DevCleaner */ = {
+		7110B48D2030F17B00EDBFA3 /* Ultimate Xcode Cleaner */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7110B49E2030F17B00EDBFA3 /* Build configuration list for PBXNativeTarget "DevCleaner" */;
+			buildConfigurationList = 7110B49E2030F17B00EDBFA3 /* Build configuration list for PBXNativeTarget "Ultimate Xcode Cleaner" */;
 			buildPhases = (
 				7110B48A2030F17B00EDBFA3 /* Sources */,
 				7110B48B2030F17B00EDBFA3 /* Frameworks */,
@@ -356,9 +356,9 @@
 			);
 			dependencies = (
 			);
-			name = DevCleaner;
+			name = "Ultimate Xcode Cleaner";
 			productName = XcodeCleaner;
-			productReference = 7110B48E2030F17B00EDBFA3 /* DevCleaner.app */;
+			productReference = 7110B48E2030F17B00EDBFA3 /* Ultimate Xcode Cleaner.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -390,7 +390,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7110B4892030F17B00EDBFA3 /* Build configuration list for PBXProject "DevCleaner" */;
+			buildConfigurationList = 7110B4892030F17B00EDBFA3 /* Build configuration list for PBXProject "Ultimate Xcode Cleaner" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -403,7 +403,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7110B48D2030F17B00EDBFA3 /* DevCleaner */,
+				7110B48D2030F17B00EDBFA3 /* Ultimate Xcode Cleaner */,
 			);
 		};
 /* End PBXProject section */
@@ -631,16 +631,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3DS5SGYDG6;
+				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/DevCleaner/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Xcode Cleaner";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.6.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.oneminutegames.XcodeCleaner;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.topscrech.Ultimate-Xcode-Cleaner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -655,16 +657,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3DS5SGYDG6;
+				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/DevCleaner/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Xcode Cleaner";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.6.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.oneminutegames.XcodeCleaner;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.topscrech.Ultimate-Xcode-Cleaner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -673,7 +677,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7110B4892030F17B00EDBFA3 /* Build configuration list for PBXProject "DevCleaner" */ = {
+		7110B4892030F17B00EDBFA3 /* Build configuration list for PBXProject "Ultimate Xcode Cleaner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7110B49C2030F17B00EDBFA3 /* Debug */,
@@ -682,7 +686,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7110B49E2030F17B00EDBFA3 /* Build configuration list for PBXNativeTarget "DevCleaner" */ = {
+		7110B49E2030F17B00EDBFA3 /* Build configuration list for PBXNativeTarget "Ultimate Xcode Cleaner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7110B49F2030F17B00EDBFA3 /* Debug */,

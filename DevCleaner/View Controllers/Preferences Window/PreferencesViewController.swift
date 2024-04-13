@@ -1,30 +1,10 @@
-//
-//  PreferencesViewController.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 01.05.2018.
-//  Copyright © 2018 One Minute Games. All rights reserved.
-//
-//  DevCleaner is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  DevCleaner is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
-
 import Cocoa
 
 final class PreferencesViewController: NSViewController {
     // MARK: Types
     private enum CustomLocation {
-        case `default`
-        case custom
+        case `default`,
+             custom
     }
     
     // MARK: Properties & outlets
@@ -48,12 +28,12 @@ final class PreferencesViewController: NSViewController {
         super.viewDidLoad()
         
         // load preferences
-        self.setNotificationsEnabled(Preferences.shared.notificationsEnabled)
-        self.setNotificationsPeriod(Preferences.shared.notificationsPeriod)
-        self.setDryRunEnabled(Preferences.shared.dryRunEnabled)
-        self.setXcodeWarningEnabled(Preferences.shared.showXcodeWarning)
-        self.setCustomDerivedData(folder: Preferences.shared.customDerivedDataFolder)
-        self.setCustomArchives(folder: Preferences.shared.customArchivesFolder)
+        setNotificationsEnabled(Preferences.shared.notificationsEnabled)
+        setNotificationsPeriod(Preferences.shared.notificationsPeriod)
+        setDryRunEnabled(Preferences.shared.dryRunEnabled)
+        setXcodeWarningEnabled(Preferences.shared.showXcodeWarning)
+        setCustomDerivedData(folder: Preferences.shared.customDerivedDataFolder)
+        setCustomArchives(folder: Preferences.shared.customArchivesFolder)
     }
     
     // MARK: Helpers
@@ -82,14 +62,18 @@ final class PreferencesViewController: NSViewController {
                     Preferences.shared.setFolderBookmark(bookmarkData: bookmarkData, for: folderUrl)
                     return folderUrl
                 } else {
-                    Alerts.infoAlert(title: "Can't choose this folder",
-                                   message: "Some problem with security.")
+                    Alerts.infoAlert(
+                        title: "Can't choose this folder",
+                        message: "Some problem with security."
+                    )
                     
                     return nil
                 }
             } else {
-                Alerts.infoAlert(title: "Can't choose this folder",
-                               message: "Access to this folder is denied.")
+                Alerts.infoAlert(
+                    title: "Can't choose this folder",
+                    message: "Access to this folder is denied."
+                )
                 
                 return nil
             }
@@ -108,13 +92,16 @@ final class PreferencesViewController: NSViewController {
     
     private func customFolderLocationFromTitle(_ title: String) -> CustomLocation? {
         let result: CustomLocation?
+        
         switch title {
-            case "Default":
-                result = .default
-            case "Custom":
-                result = .custom
-            default:
-                result = nil
+        case "Default":
+            result = .default
+            
+        case "Custom":
+            result = .custom
+            
+        default:
+            result = nil
         }
         
         return result
@@ -122,11 +109,13 @@ final class PreferencesViewController: NSViewController {
     
     private func titleFromCustomFolderLocation(_ location: CustomLocation) -> String {
         let result: String
+        
         switch location {
-            case .custom:
-                result = "Custom"
-            case .default:
-                result = "Default"
+        case .custom:
+            result = "Custom"
+            
+        case .default:
+            result = "Default"
         }
         
         return result
@@ -135,15 +124,15 @@ final class PreferencesViewController: NSViewController {
     private func titleFromPeriod(_ period: ScanReminders.Period) -> String {
         let result: String
         switch period {
-            case .everyWeek:
-                result = "Every week"
-            case .every2weeks:
-                result = "Every 2 weeks"
-            case .everyMonth:
-                result = "Every month"
-            case .every2Months:
-                result = "Every 2 months"
-        
+        case .everyWeek:
+            result = "Every week"
+        case .every2weeks:
+            result = "Every 2 weeks"
+        case .everyMonth:
+            result = "Every month"
+        case .every2Months:
+            result = "Every 2 months"
+            
         }
         
         return result
@@ -151,75 +140,81 @@ final class PreferencesViewController: NSViewController {
     
     private func periodFromTitle(_ title: String) -> ScanReminders.Period? {
         let result: ScanReminders.Period?
+        
         switch title {
-            case "Every week":
-                result = .everyWeek
-            case "Every 2 weeks":
-                result = .every2weeks
-            case "Every month":
-                result = .everyMonth
-            case "Every 2 months":
-                result = .every2Months
-            default:
-                result = nil
+        case "Every week":
+            result = .everyWeek
+            
+        case "Every 2 weeks":
+            result = .every2weeks
+            
+        case "Every month":
+            result = .everyMonth
+            
+        case "Every 2 months":
+            result = .every2Months
+            
+        default:
+            result = nil
         }
         
         return result
     }
     
     private func setNotificationsEnabled(_ value:  Bool) {
-        self.notificationsEnabledButton.state = value ? .on : .off
-        self.notificationsPeriodPopUpButton.isEnabled = value
+        notificationsEnabledButton.state = value ? .on : .off
+        notificationsPeriodPopUpButton.isEnabled = value
     }
     
     private func setNotificationsPeriod(_ period: ScanReminders.Period) {
-        let periodTitle = self.titleFromPeriod(period)
-        self.notificationsPeriodPopUpButton.selectItem(withTitle: periodTitle)
+        let periodTitle = titleFromPeriod(period)
+        
+        notificationsPeriodPopUpButton.selectItem(withTitle: periodTitle)
     }
     
     private func setDryRunEnabled(_ value: Bool) {
-        self.dryRunEnabledButton.state = value ? .on : .off
+        dryRunEnabledButton.state = value ? .on : .off
     }
     
     private func setXcodeWarningEnabled(_ value: Bool) {
-        self.xcodeWarningButton.state = value ? .on : .off
+        xcodeWarningButton.state = value ? .on : .off
     }
     
     private func setCustomDerivedData(folder: URL?) {
         if let customFolder = folder {
-            self.customDerivedDataTextField.stringValue = customFolder.path
-            self.customDerivedDataTextField.toolTip = customFolder.path
+            customDerivedDataTextField.stringValue = customFolder.path
+            customDerivedDataTextField.toolTip = customFolder.path
             
-            self.derivedDataPopUpButton.selectItem(withTitle: self.titleFromCustomFolderLocation(.custom))
-            self.customDerivedDataTextField.isEnabled = true
-            self.changeCustomDerivedDataButton.isEnabled = true
+            derivedDataPopUpButton.selectItem(withTitle: titleFromCustomFolderLocation(.custom))
+            customDerivedDataTextField.isEnabled = true
+            changeCustomDerivedDataButton.isEnabled = true
         } else {
-            let defaultFolder = self.xcodeDefaultFolder(appending: "DerivedData").path
-            self.customDerivedDataTextField.stringValue = defaultFolder
-            self.customDerivedDataTextField.toolTip = defaultFolder
+            let defaultFolder = xcodeDefaultFolder(appending: "DerivedData").path
+            customDerivedDataTextField.stringValue = defaultFolder
+            customDerivedDataTextField.toolTip = defaultFolder
             
-            self.derivedDataPopUpButton.selectItem(withTitle: self.titleFromCustomFolderLocation(.default))
-            self.changeCustomDerivedDataButton.isEnabled = false
-            self.customDerivedDataTextField.isEnabled = false
+            derivedDataPopUpButton.selectItem(withTitle: titleFromCustomFolderLocation(.default))
+            changeCustomDerivedDataButton.isEnabled = false
+            customDerivedDataTextField.isEnabled = false
         }
     }
     
     private func setCustomArchives(folder: URL?) {
         if let customFolder = folder {
-            self.customArchivesTextField.stringValue = customFolder.path
-            self.customArchivesTextField.toolTip = customFolder.path
+            customArchivesTextField.stringValue = customFolder.path
+            customArchivesTextField.toolTip = customFolder.path
             
-            self.archivesPopUpButton.selectItem(withTitle: self.titleFromCustomFolderLocation(.custom))
-            self.customArchivesTextField.isEnabled = true
-            self.changeCustomArchivesButton.isEnabled = true
+            archivesPopUpButton.selectItem(withTitle: titleFromCustomFolderLocation(.custom))
+            customArchivesTextField.isEnabled = true
+            changeCustomArchivesButton.isEnabled = true
         } else {
-            let defaultFolder = self.xcodeDefaultFolder(appending: "Archives").path
-            self.customArchivesTextField.stringValue = defaultFolder
-            self.customArchivesTextField.toolTip = defaultFolder
+            let defaultFolder = xcodeDefaultFolder(appending: "Archives").path
+            customArchivesTextField.stringValue = defaultFolder
+            customArchivesTextField.toolTip = defaultFolder
             
-            self.archivesPopUpButton.selectItem(withTitle: self.titleFromCustomFolderLocation(.default))
-            self.customArchivesTextField.isEnabled = false
-            self.changeCustomArchivesButton.isEnabled = false
+            archivesPopUpButton.selectItem(withTitle: titleFromCustomFolderLocation(.default))
+            customArchivesTextField.isEnabled = false
+            changeCustomArchivesButton.isEnabled = false
         }
     }
     
@@ -227,7 +222,7 @@ final class PreferencesViewController: NSViewController {
     @IBAction func updateNotificationsEnabled(_ sender: NSButton) {
         let enabled = sender.state == .on
         
-        self.setNotificationsEnabled(enabled)
+        setNotificationsEnabled(enabled)
         
         Preferences.shared.notificationsEnabled = enabled
         
@@ -243,7 +238,7 @@ final class PreferencesViewController: NSViewController {
             return
         }
         
-        guard let selectedPeriod = self.periodFromTitle(selectedItem.title) else {
+        guard let selectedPeriod = periodFromTitle(selectedItem.title) else {
             return
         }
         
@@ -254,7 +249,7 @@ final class PreferencesViewController: NSViewController {
     @IBAction func updateDryRun(_ sender: NSButton) {
         let enabled = sender.state == .on
         
-        self.setDryRunEnabled(enabled)
+        setDryRunEnabled(enabled)
         
         Preferences.shared.dryRunEnabled = enabled
     }
@@ -262,7 +257,7 @@ final class PreferencesViewController: NSViewController {
     @IBAction func updateXcodeWarning(_ sender: NSButton) {
         let enabled = sender.state == .on
         
-        self.setXcodeWarningEnabled(enabled)
+        setXcodeWarningEnabled(enabled)
         
         Preferences.shared.showXcodeWarning = enabled
     }
@@ -272,23 +267,23 @@ final class PreferencesViewController: NSViewController {
             return
         }
         
-        guard let location = self.customFolderLocationFromTitle(selectedItem.title) else {
+        guard let location = customFolderLocationFromTitle(selectedItem.title) else {
             return
         }
         
         switch location {
-            case .default:
-                Preferences.shared.customDerivedDataFolder = nil
-                
-                self.changeCustomDerivedDataButton.isEnabled = false
-                self.customDerivedDataTextField.isEnabled = false
-                self.customDerivedDataTextField.stringValue = self.xcodeDefaultFolder(appending: "DerivedData").path
-            case .custom:
-                let folderUrl = URL(fileURLWithPath: self.customDerivedDataTextField.stringValue, isDirectory: true)
-                Preferences.shared.customDerivedDataFolder = folderUrl
-                
-                self.customDerivedDataTextField.isEnabled = true
-                self.changeCustomDerivedDataButton.isEnabled = true
+        case .default:
+            Preferences.shared.customDerivedDataFolder = nil
+            
+            changeCustomDerivedDataButton.isEnabled = false
+            customDerivedDataTextField.isEnabled = false
+            customDerivedDataTextField.stringValue = xcodeDefaultFolder(appending: "DerivedData").path
+        case .custom:
+            let folderUrl = URL(fileURLWithPath: customDerivedDataTextField.stringValue, isDirectory: true)
+            Preferences.shared.customDerivedDataFolder = folderUrl
+            
+            customDerivedDataTextField.isEnabled = true
+            changeCustomDerivedDataButton.isEnabled = true
         }
     }
     
@@ -297,41 +292,44 @@ final class PreferencesViewController: NSViewController {
             return
         }
         
-        guard let location = self.customFolderLocationFromTitle(selectedItem.title) else {
+        guard let location = customFolderLocationFromTitle(selectedItem.title) else {
             return
         }
         
         switch location {
-            case .default:
-                Preferences.shared.customArchivesFolder = nil
-                
-                self.changeCustomArchivesButton.isEnabled = false
-                self.customArchivesTextField.isEnabled = false
-                self.customArchivesTextField.stringValue = self.xcodeDefaultFolder(appending: "Archives").path
-            case .custom:
-                let folderUrl = URL(fileURLWithPath: self.customArchivesTextField.stringValue, isDirectory: true)
-                Preferences.shared.customArchivesFolder = folderUrl
-                
-                self.customArchivesTextField.isEnabled = true
-                self.changeCustomArchivesButton.isEnabled = true
+        case .default:
+            Preferences.shared.customArchivesFolder = nil
+            
+            changeCustomArchivesButton.isEnabled = false
+            customArchivesTextField.isEnabled = false
+            customArchivesTextField.stringValue = xcodeDefaultFolder(appending: "Archives").path
+            
+        case .custom:
+            let folderUrl = URL(fileURLWithPath: customArchivesTextField.stringValue, isDirectory: true)
+            Preferences.shared.customArchivesFolder = folderUrl
+            
+            customArchivesTextField.isEnabled = true
+            changeCustomArchivesButton.isEnabled = true
         }
     }
     
     @IBAction func selectCustomDerivedDataFolder(_ sender: NSButton) {
-        let startFolder = URL(fileURLWithPath: self.customDerivedDataTextField.stringValue, isDirectory: true)
-        if let selectedDerivedDataFolder = self.chooseAndBookmarkFolder(startWith: startFolder) {
+        let startFolder = URL(fileURLWithPath: customDerivedDataTextField.stringValue, isDirectory: true)
+        
+        if let selectedDerivedDataFolder = chooseAndBookmarkFolder(startWith: startFolder) {
             Preferences.shared.customDerivedDataFolder = selectedDerivedDataFolder
             
-            self.customDerivedDataTextField.stringValue = selectedDerivedDataFolder.path
+            customDerivedDataTextField.stringValue = selectedDerivedDataFolder.path
         }
     }
     
     @IBAction func selectCustomArchivesFolder(_ sender: NSButton) {
-        let startFolder = URL(fileURLWithPath: self.customArchivesTextField.stringValue, isDirectory: true)
-        if let selectedArchivesFolder = self.chooseAndBookmarkFolder(startWith: startFolder) {
+        let startFolder = URL(fileURLWithPath: customArchivesTextField.stringValue, isDirectory: true)
+        
+        if let selectedArchivesFolder = chooseAndBookmarkFolder(startWith: startFolder) {
             Preferences.shared.customArchivesFolder = selectedArchivesFolder
             
-            self.customArchivesTextField.stringValue = selectedArchivesFolder.path
+            customArchivesTextField.stringValue = selectedArchivesFolder.path
         }
     }
 }

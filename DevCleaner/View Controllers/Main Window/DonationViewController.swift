@@ -1,24 +1,3 @@
-//
-//  DonationViewController.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 19.05.2018.
-//  Copyright © 2018 One Minute Games. All rights reserved.
-//
-//  DevCleaner is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  DevCleaner is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
-
-import Cocoa
 import StoreKit
 
 internal final class DonationViewController: NSViewController {
@@ -33,7 +12,7 @@ internal final class DonationViewController: NSViewController {
     @IBOutlet weak var donationsInterfaceView: NSView!
     
     private var loadingView: LoadingView! = nil
-
+    
     private var donationProducts: [DonationProduct] = []
     
     // MARK: Initialization & overrides
@@ -41,11 +20,11 @@ internal final class DonationViewController: NSViewController {
         super.viewDidLoad()
         
         // make loading view
-        self.loadingView = LoadingView(frame: self.view.frame)
-        self.startLoading()
+        loadingView = LoadingView(frame: view.frame)
+        startLoading()
         
         // update benefits label
-        self.xcodeCleanerBenefitsTextField.attributedStringValue = self.benefitsAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
+        xcodeCleanerBenefitsTextField.attributedStringValue = benefitsAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
         
         // update donation products
         Donations.shared.delegate = self
@@ -55,57 +34,65 @@ internal final class DonationViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         
-        self.view.window?.styleMask.remove(.resizable)
+        view.window?.styleMask.remove(.resizable)
     }
     
     // MARK: Loading
     private func startLoading() {
-        if self.loadingView.superview == nil {
-            self.donationsInterfaceView.isHidden = true
-            self.view.addSubview(self.loadingView)
+        if loadingView.superview == nil {
+            donationsInterfaceView.isHidden = true
+            view.addSubview(loadingView)
         }
     }
     
     private func stopLoading() {
-        self.donationsInterfaceView.isHidden = false
-        self.loadingView.removeFromSuperview()
+        donationsInterfaceView.isHidden = false
+        loadingView.removeFromSuperview()
     }
     
     // MARK: Helpers
     private func benefitsAttributedString(totalBytesCleaned: Int64) -> NSAttributedString {
         let totalBytesString = ByteCountFormatter.string(fromByteCount: totalBytesCleaned, countStyle: .file)
         
-        let fontSize: CGFloat = 13.0
+        let fontSize: CGFloat = 13
         let result = NSMutableAttributedString()
         
-        let partOne = NSAttributedString(string: "You saved total of ",
-                                           attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
+        let partOne = NSAttributedString(
+            string: "You saved total of ",
+            attributes: [.font : NSFont.systemFont(ofSize: fontSize)]
+        )
         result.append(partOne)
         
-        let partTwo = NSAttributedString(string: "\(totalBytesString)",
-                                            attributes: [.font : NSFont.boldSystemFont(ofSize: fontSize)])
+        let partTwo = NSAttributedString(
+            string: "\(totalBytesString)",
+            attributes: [.font : NSFont.boldSystemFont(ofSize: fontSize)]
+        )
         result.append(partTwo)
         
-        let partThree = NSAttributedString(string: " thanks to DevCleaner!",
-                                           attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
+        let partThree = NSAttributedString(
+            string: " thanks to DevCleaner!",
+            attributes: [.font : NSFont.systemFont(ofSize: fontSize)]
+        )
         result.append(partThree)
         
         return result
     }
-
+    
     private func productKindForTag(_ tag: Int) -> DonationProduct.Kind? {
         switch tag {
-            case 1: return .smallCoffee
-            case 2: return .bigCoffee
-            case 3: return .lunch
-            default: return nil
+        case 1: .smallCoffee
+        case 2: .bigCoffee
+        case 3: .lunch
+        default: nil
         }
     }
     
     private func productForProductKind(_ productKind: DonationProduct.Kind) -> DonationProduct? {
-        return self.donationProducts.filter { $0.kind == productKind }.first
+        donationProducts.filter {
+            $0.kind == productKind
+        }.first
     }
-
+    
     // MARK: Updating price & titles labels
     private func fittingPriceFontSize(for attributedString: NSAttributedString, initialFont: NSFont, buttonWidth: CGFloat) -> CGFloat {
         let attributedString = NSMutableAttributedString(attributedString: attributedString)
@@ -113,11 +100,12 @@ internal final class DonationViewController: NSViewController {
         var stringSize = attributedString.size()
         
         while ceil(stringSize.width) >= (buttonWidth - 10) { // including some margins
-            if fontSize <= 1.0 { // we can't go any further
+            if fontSize <= 1 { // we can't go any further
                 break
             }
-    
+            
             let newFontSize = fontSize - 1.5
+            
             if let newFont = NSFont(descriptor: initialFont.fontDescriptor, size: newFontSize) {
                 attributedString.addAttribute(.font, value: newFont, range: NSMakeRange(0, attributedString.length))
                 
@@ -140,13 +128,19 @@ internal final class DonationViewController: NSViewController {
         let title = NSMutableAttributedString()
         
         // price part
-        let pricePart = NSAttributedString(string: price + "\n",
-                                           attributes: [.font : NSFont.boldSystemFont(ofSize: priceFontSize)])
+        let pricePart = NSAttributedString(
+            string: price + "\n",
+            attributes: [.font : NSFont.boldSystemFont(ofSize: priceFontSize)]
+        )
+        
         title.append(pricePart)
         
         // info part
-        let infoPart = NSAttributedString(string: info,
-                                          attributes: [.font : NSFont.systemFont(ofSize: infoFontSize)])
+        let infoPart = NSAttributedString(
+            string: info,
+            attributes: [.font : NSFont.systemFont(ofSize: infoFontSize)]
+        )
+        
         title.append(infoPart)
         
         title.addAttribute(.paragraphStyle, value: style, range: NSMakeRange(0, title.length))
@@ -155,17 +149,18 @@ internal final class DonationViewController: NSViewController {
     }
     
     private func updateDonationsButtons(for products: [DonationProduct], error: DonationsProductsFetchError?) {
-        var priceFontSize: CGFloat = 25.0
-        let infoFontSize: CGFloat = 13.0
-        let buttonWidth: CGFloat = 100.0
+        var priceFontSize: CGFloat = 25
+        let infoFontSize: CGFloat = 13
+        let buttonWidth: CGFloat = 100
         
         // calculate what size price font should have
         var priceFontSizes = [CGFloat]()
+        
         for product in products {
             let priceFont = NSFont.boldSystemFont(ofSize: priceFontSize)
             let priceAttributedString = NSAttributedString(string: product.price + "\n",
-                                               attributes: [.font : priceFont])
-            let fittingPriceFontSize = self.fittingPriceFontSize(for: priceAttributedString, initialFont: priceFont, buttonWidth: buttonWidth)
+                                                           attributes: [.font : priceFont])
+            let fittingPriceFontSize = fittingPriceFontSize(for: priceAttributedString, initialFont: priceFont, buttonWidth: buttonWidth)
             priceFontSizes.append(fittingPriceFontSize)
         }
         
@@ -176,38 +171,47 @@ internal final class DonationViewController: NSViewController {
         // update all the buttons
         if error == nil && products.count == DonationProduct.Kind.allKinds.count {
             for product in products {
+                
                 switch product.kind {
-                    case .smallCoffee:
-                        self.updateDonationButton(button: self.smallDonationButton,
-                                                  price: product.price,
-                                                  info: product.info,
-                                                  priceFontSize: priceFontSize,
-                                                  infoFontSize: infoFontSize)
-                    case .bigCoffee:
-                        self.updateDonationButton(button: self.mediumDonationButton,
-                                                  price: product.price,
-                                                  info: product.info,
-                                                  priceFontSize: priceFontSize,
-                                                  infoFontSize: infoFontSize)
-                    case .lunch:
-                        self.updateDonationButton(button: self.bigDonationButton,
-                                                  price: product.price,
-                                                  info: product.info,
-                                                  priceFontSize: priceFontSize,
-                                                  infoFontSize: infoFontSize)
-                        
+                case .smallCoffee:
+                    updateDonationButton(
+                        button: smallDonationButton,
+                        price: product.price,
+                        info: product.info,
+                        priceFontSize: priceFontSize,
+                        infoFontSize: infoFontSize
+                    )
+                    
+                case .bigCoffee:
+                    updateDonationButton(
+                        button: mediumDonationButton,
+                        price: product.price,
+                        info: product.info,
+                        priceFontSize: priceFontSize,
+                        infoFontSize: infoFontSize
+                    )
+                    
+                case .lunch:
+                    updateDonationButton(
+                        button: bigDonationButton,
+                        price: product.price,
+                        info: product.info,
+                        priceFontSize: priceFontSize,
+                        infoFontSize: infoFontSize
+                    )
+                    
                 }
             }
         } else { // it seems we have an error while loading donation products!
-            let title: String = "Error while loading tips"
+            let title = "Error while loading tips"
             let message: String
             
             if let error {
                 switch error {
-                    case .noProductsAvailable: message = "No tips available!"
-                    case .invalidProducts(let products): message = "Invalid tip products: \(products)"
-                        
-                    case .storeError(let error): message = "AppStore error: \(error.localizedDescription)"
+                case .noProductsAvailable: message = "No tips available!"
+                case .invalidProducts(let products): message = "Invalid tip products: \(products)"
+                    
+                case .storeError(let error): message = "AppStore error: \(error.localizedDescription)"
                 }
             } else {
                 message = "Unrecognized error!"
@@ -215,18 +219,18 @@ internal final class DonationViewController: NSViewController {
             
             Alerts.warningAlert(title: title, message: message)
             
-            self.dismiss(self)
+            dismiss(self)
         }
     }
     
     // MARK: Actions
     @IBAction func buyProduct(_ sender: NSButton) {
-        guard let productKind = self.productKindForTag(sender.tag) else {
+        guard let productKind = productKindForTag(sender.tag) else {
             log.warning("SupportViewController: Product kind for given sender tag not found: \(sender.tag)")
             return
         }
         
-        guard let product = self.productForProductKind(productKind) else {
+        guard let product = productForProductKind(productKind) else {
             log.warning("SupportViewController: Product of given kind not found: \(productKind)")
             return
         }

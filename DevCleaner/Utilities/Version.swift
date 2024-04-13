@@ -1,23 +1,3 @@
-//
-//  Version.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 18.03.2018.
-//  Copyright © 2018 One Minute Games. All rights reserved.
-//
-//  DevCleaner is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  DevCleaner is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
-
 import Foundation
 
 // MARK: Version struct
@@ -39,36 +19,36 @@ public struct Version {
         
         if components.count == 3 {
             if let majorInt = UInt(components[0]) {
-                self.major = majorInt
+                major = majorInt
             } else {
                 return nil
             }
             
             if let minorInt = UInt(components[1]) {
-                self.minor = minorInt
+                minor = minorInt
             } else {
                 return nil
             }
             
             if let patchInt = UInt(components[2]) {
-                self.patch = patchInt
+                patch = patchInt
             } else {
                 return nil
             }
         } else if components.count == 2 {
             if let majorInt = UInt(components[0]) {
-                self.major = majorInt
+                major = majorInt
             } else {
                 return nil
             }
             
             if let minorInt = UInt(components[1]) {
-                self.minor = minorInt
+                minor = minorInt
             } else {
                 return nil
             }
             
-            self.patch = nil
+            patch = nil
             
         } else {
             return nil
@@ -112,12 +92,12 @@ extension Version: Comparable {
 // MARK: - CustomStringConvertible conformance
 extension Version: CustomStringConvertible {
     public var description: String {
-        var result = "\(self.major).\(self.minor)"
-        if let patch = self.patch {
+        var result = "\(major).\(minor)"
+        
+        if let patch {
             result += ".\(patch)"
         }
         
         return result
     }
 }
-

@@ -1,20 +1,10 @@
-//
-//  Donations.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 17.06.2018.
-//  Copyright © 2018 One Minute Games. All rights reserved.
-//
-
-import Foundation
 import StoreKit
 
 // MARK: Donations product fetch error
 public enum DonationsProductsFetchError {
-    case noProductsAvailable
-    case invalidProducts([String])
-    
-    case storeError(Error)
+    case noProductsAvailable,
+         invalidProducts([String]),
+         storeError(Error)
 }
 
 // MARK: - Donations delegate
@@ -30,12 +20,12 @@ public protocol DonationsDelegate: AnyObject {
 // MARK: - Donation product
 public struct DonationProduct {
     public enum Kind: String {
-        case smallCoffee = "SMALL_COFFEE"
-        case bigCoffee = "BIG_COFFEE"
-        case lunch = "LUNCH"
+        case smallCoffee = "SMALL_COFFEE",
+             bigCoffee = "BIG_COFFEE",
+             lunch = "LUNCH"
         
         public static var allKinds: [Kind] {
-            return [.smallCoffee, .bigCoffee, .lunch]
+            [.smallCoffee, .bigCoffee, .lunch]
         }
     }
     
@@ -46,7 +36,7 @@ public struct DonationProduct {
     public let info: String
     
     public var identifier: String {
-        return self.kind.rawValue
+        kind.rawValue
     }
     
     public init?(product: SKProduct) {
@@ -55,14 +45,14 @@ public struct DonationProduct {
         }
         
         self.kind = kind
-        self.skProduct = product
+        skProduct = product
         
         let nf = NumberFormatter()
         nf.numberStyle = .currency
         nf.locale = product.priceLocale
         
-        self.price = nf.string(from: self.skProduct.price) ?? ""
-        self.info = self.skProduct.localizedTitle
+        price = nf.string(from: skProduct.price) ?? ""
+        info = skProduct.localizedTitle
     }
 }
 
@@ -75,9 +65,9 @@ public final class Donations: NSObject {
     public weak var delegate: DonationsDelegate? = nil
     
     public var canMakeDonations: Bool {
-        #if DEBUG
+#if DEBUG
         return SKPaymentQueue.canMakePayments()
-        #else
+#else
         // we can make payments and we're on Mac App Store build
         let canMakePayments = SKPaymentQueue.canMakePayments()
         let receiptPresent: Bool
@@ -89,7 +79,7 @@ public final class Donations: NSObject {
         
         return canMakePayments && receiptPresent
         
-        #endif
+#endif
     }
     
     public static let shared = Donations()
@@ -108,9 +98,9 @@ public final class Donations: NSObject {
     public func fetchProductsInfo() {
         let donationProductsIds = DonationProduct.Kind.allKinds.map { $0.rawValue }
         
-        self.productsRequest = SKProductsRequest(productIdentifiers: Set(donationProductsIds))
-        self.productsRequest?.delegate = self
-        self.productsRequest?.start()
+        productsRequest = SKProductsRequest(productIdentifiers: Set(donationProductsIds))
+        productsRequest?.delegate = self
+        productsRequest?.start()
         
         log.info("Requesting donation products with ids: \(donationProductsIds)")
     }
@@ -123,7 +113,7 @@ public final class Donations: NSObject {
         
         SKPaymentQueue.default().add(payment)
         
-        self.delegate?.transactionDidStart(for: product)
+        delegate?.transactionDidStart(for: product)
     }
 }
 
@@ -134,7 +124,7 @@ extension Donations: SKProductsRequestDelegate {
     
     public func request(_ request: SKRequest, didFailWithError error: Error) {
         log.error("SKProductsRequest failed: \(error)")
-        self.delegate?.donations(self, donationProductsFetchFailedWithError: .storeError(error))
+        delegate?.donations(self, donationProductsFetchFailedWithError: .storeError(error))
     }
     
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
@@ -142,28 +132,30 @@ extension Donations: SKProductsRequestDelegate {
         
         guard !response.products.isEmpty else {
             log.error("No products returned from store!")
-
-            self.delegate?.donations(self, donationProductsFetchFailedWithError: .noProductsAvailable)
+            
+            delegate?.donations(self, donationProductsFetchFailedWithError: .noProductsAvailable)
             return
         }
         
         guard response.products.count == expectedNumberOfProducts else {
             log.error("Unexpected number of products returned from store: \(response.products.count)")
             
-            self.delegate?.donations(self, donationProductsFetchFailedWithError: .invalidProducts(response.products.map { $0.productIdentifier } ))
+            delegate?.donations(self, donationProductsFetchFailedWithError: .invalidProducts(response.products.map { $0.productIdentifier } ))
             return
         }
         
         let donationProducts = response.products.compactMap { DonationProduct(product: $0) }
+        
         guard donationProducts.count == expectedNumberOfProducts else {
             log.error("Not all products have proper ids: \(response.products.count)")
             
-            self.delegate?.donations(self, donationProductsFetchFailedWithError: .invalidProducts(response.products.map { $0.productIdentifier } ))
+            delegate?.donations(self, donationProductsFetchFailedWithError: .invalidProducts(response.products.map { $0.productIdentifier } ))
             return
         }
         
-        self.iapProducts = donationProducts
-        self.delegate?.donations(self, didReceive: self.iapProducts)
+        iapProducts = donationProducts
+        
+        delegate?.donations(self, didReceive: iapProducts)
     }
 }
 
@@ -171,7 +163,7 @@ extension Donations: SKPaymentTransactionObserver {
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             // get our product related to transaction
-            guard let transactionProduct = self.iapProducts.filter( { $0.identifier == transaction.payment.productIdentifier } ).first else {
+            guard let transactionProduct = iapProducts.filter( { $0.identifier == transaction.payment.productIdentifier } ).first else {
                 log.warning("Donations: Updated transaction thats product have unknown identifier or not yet fetched: \(transaction.payment.productIdentifier)")
                 
                 // we can safely finish such transaction since we don't deliver any special stuff
@@ -181,17 +173,20 @@ extension Donations: SKPaymentTransactionObserver {
             }
             
             switch transaction.transactionState {
-                case .purchasing, .deferred:
-                    self.delegate?.transactionIsBeingProcessed(for: transactionProduct)
-                case .purchased, .failed:
-                    self.delegate?.transactionDidFinish(for: transactionProduct, error: transaction.error)
-                    queue.finishTransaction(transaction)
-                case .restored:
-                    // we don't support restored purchases here, so no delegate
-                    queue.finishTransaction(transaction)
-                @unknown default:
-                    // in case of any future cases, just finish transaction which seems sensible
-                    queue.finishTransaction(transaction)
+            case .purchasing, .deferred:
+                delegate?.transactionIsBeingProcessed(for: transactionProduct)
+                
+            case .purchased, .failed:
+                delegate?.transactionDidFinish(for: transactionProduct, error: transaction.error)
+                queue.finishTransaction(transaction)
+                
+            case .restored:
+                // we don't support restored purchases here, so no delegate
+                queue.finishTransaction(transaction)
+                
+            @unknown default:
+                // in case of any future cases, just finish transaction which seems sensible
+                queue.finishTransaction(transaction)
             }
         }
     }

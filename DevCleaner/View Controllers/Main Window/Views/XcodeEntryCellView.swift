@@ -1,23 +1,3 @@
-//
-//  XcodeEntryCellView.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 14.04.2018.
-//  Copyright © 2018 One Minute Games. All rights reserved.
-//
-//  DevCleaner is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  DevCleaner is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
-
 import Cocoa
 
 // MARK: Xcode Entry Cell View Delegate
@@ -37,36 +17,36 @@ final class XcodeEntryCellView: NSTableCellView {
     // MARK: Setup
     internal func setup(with xcodeEntry: XcodeFileEntry, delegate: XcodeEntryCellViewDelegate) {
         // reassing entry
-        self.entry = xcodeEntry
+        entry = xcodeEntry
         
         // delegate
         self.delegate = delegate
         
         // checkbox
-        self.checkBox.state = self.entrySelectionToControlState(xcodeEntry.selection)
+        checkBox.state = entrySelectionToControlState(xcodeEntry.selection)
         
         // label
-		self.textField?.font = NSFont.monospacedDigitSystemFont(ofSize: self.textField?.font?.pointSize ?? 13, weight: .regular)
-        self.textField?.attributedStringValue = self.attributedString(for: xcodeEntry)
-        self.textField?.sizeToFit()
+        textField?.font = NSFont.monospacedDigitSystemFont(ofSize: textField?.font?.pointSize ?? 13, weight: .regular)
+        textField?.attributedStringValue = attributedString(for: xcodeEntry)
+        textField?.sizeToFit()
         
         // tooltip
         if xcodeEntry.tooltip {
-            self.toolTip = xcodeEntry.tooltipText
+            toolTip = xcodeEntry.tooltipText
         } else {
-            self.toolTip = nil
+            toolTip = nil
         }
         
         // icon
-        self.imageView?.image = self.iconForEntry(xcodeEntry)
+        imageView?.image = iconForEntry(xcodeEntry)
         
         // disable if no children and path
         if xcodeEntry.isEmpty {
-            self.checkBox.isEnabled = false
-            self.checkBox.state = .off
+            checkBox.isEnabled = false
+            checkBox.state = .off
             
-            self.imageView?.isEnabled = false
-            self.textField?.isEnabled = false
+            imageView?.isEnabled = false
+            textField?.isEnabled = false
         }
     }
     
@@ -74,11 +54,11 @@ final class XcodeEntryCellView: NSTableCellView {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.checkBox.isEnabled = true
-        self.checkBox.state = .off
+        checkBox.isEnabled = true
+        checkBox.state = .off
         
-        self.imageView?.isEnabled = true
-        self.textField?.isEnabled = true
+        imageView?.isEnabled = true
+        textField?.isEnabled = true
     }
     
     private func attributedString(for xcodeEntry: XcodeFileEntry) -> NSAttributedString {
@@ -91,8 +71,9 @@ final class XcodeEntryCellView: NSTableCellView {
         // extra info if present
         if !xcodeEntry.extraInfo.isEmpty {
             let extraInfo = NSAttributedString(string: " " + xcodeEntry.extraInfo, attributes: [
-                    NSAttributedString.Key.foregroundColor: NSColor.secondaryLabelColor
-                ])
+                NSAttributedString.Key.foregroundColor: NSColor.secondaryLabelColor
+            ])
+            
             result.append(extraInfo)
         }
         
@@ -106,12 +87,11 @@ final class XcodeEntryCellView: NSTableCellView {
     
     private func entrySelectionToControlState(_ entrySelection: XcodeFileEntry.Selection) -> NSControl.StateValue {
         switch entrySelection {
-            case .on:
-                return .on
-            case .off:
-                return .off
-            case .mixed:
-                return .mixed
+        case .on: .on
+            
+        case .off: .off
+            
+        case .mixed: .mixed
         }
     }
     
@@ -120,12 +100,14 @@ final class XcodeEntryCellView: NSTableCellView {
         
         if let entryIcon = xcodeEntry.icon {
             switch entryIcon {
-                case .path(let url):
-                    result = NSImage(byReferencing: url)
-                case .image(let name):
-                    result = NSImage(imageLiteralResourceName: name)
-                case .system(let name):
-                    result = NSImage(named: name)
+            case .path(let url):
+                result = NSImage(byReferencing: url)
+                
+            case .image(let name):
+                result = NSImage(imageLiteralResourceName: name)
+                
+            case .system(let name):
+                result = NSImage(named: name)
             }
         } else {
             result = nil
@@ -141,6 +123,6 @@ final class XcodeEntryCellView: NSTableCellView {
             sender.setNextState()
         }
         
-        self.delegate?.xcodeEntryCellSelectedChanged(self, state: sender.state, xcodeEntry: self.entry)
+        delegate?.xcodeEntryCellSelectedChanged(self, state: sender.state, xcodeEntry: entry)
     }
 }

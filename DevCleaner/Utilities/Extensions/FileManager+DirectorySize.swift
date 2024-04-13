@@ -1,33 +1,3 @@
-//
-//  FileManager+DirectorySize.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 18.03.2018.
-//  Copyright © 2018 One Minute Games. All rights reserved.
-//
-//  DevCleaner is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  DevCleaner is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
-
-//
-//  Original code:
-//
-//  Created by Nikolai Ruhe on 2016-02-10.
-//  Copyright (c) 2016 Nikolai Ruhe. All rights reserved.
-//
-//  https://gist.github.com/NikolaiRuhe/eeb135d20c84a7097516
-//  https://gist.github.com/blender/a75f589e6bd86aa2121618155cbdf827
-//
-
 import Foundation
 
 extension FileManager {

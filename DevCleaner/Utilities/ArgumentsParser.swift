@@ -1,23 +1,3 @@
-//
-//  ArgumentsParser.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 24/08/2019.
-//  Copyright © 2019 One Minute Games. All rights reserved.
-//
-//  DevCleaner is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  DevCleaner is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
-
 import Foundation
 
 // If you ever want to publish this as a separate library (or part of some utils code)
@@ -39,12 +19,12 @@ public protocol CommandLineOption {
 public struct OptionWithValue: CommandLineOption {
     public let name: String
     public let description: String
-
+    
     public let possibleValues: [String]?
     public var value: String?
     
     public var enabled: Bool {
-        return self.value != nil
+        self.value != nil
     }
 }
 
@@ -71,18 +51,18 @@ public class ArgumentsParser {
     public init(toolName: String? = nil, description: String) {
         self.toolName = toolName ?? ProcessInfo.processInfo.processName
         self.description = description
-        self.options = []
+        options = []
     }
     
     // MARK: Adding arguments
     public func addOption(name: String, description: String) {
         let option = Option(name: name, description: description, enabled: false)
-        self.options.append(option)
+        options.append(option)
     }
     
     public func addOptionWithValue(name: String, description: String, possibleValues: [String]? = nil) {
         let option = OptionWithValue(name: name, description: description, possibleValues: possibleValues, value: nil)
-        self.options.append(option)
+        options.append(option)
     }
     
     // MARK: Parsing
@@ -93,7 +73,7 @@ public class ArgumentsParser {
         } else if self.options.count == 0 {
             return [] // if no options then we can just return an empty array early on
         }
-                
+        
         var results = [CommandLineOption]()
         
         var i = 1 // ignore first one as its a name of program
@@ -101,12 +81,14 @@ public class ArgumentsParser {
             let arg = args[i]
             
             var currentArgParsed = false
-            for option in self.options {
+            
+            for option in options {
                 if arg == option.name && !results.contains(where: { $0.name == option.name }) {
                     // option with value
                     if var currentOptionWithValue = option as? OptionWithValue {
                         // find and parse value
                         let nextArgIndex = i + 1
+                        
                         if nextArgIndex < args.count {
                             currentOptionWithValue.value = args[nextArgIndex]
                             
@@ -140,13 +122,14 @@ public class ArgumentsParser {
     
     // MARK: Utilities
     public func printHelp() {
-        print("OVERVIEW: \(self.description)\n")
-        print("USAGE: \(self.toolName + " <command> [options]")\n")
+        print("OVERVIEW: \(description)\n")
+        print("USAGE: \(toolName + " <command> [options]")\n")
         print("OPTIONS:\n")
         
-        for option in self.options {
+        for option in options {
             if let optionWithValue = option as? OptionWithValue {
                 let valueString: String
+                
                 if let possibleValues = optionWithValue.possibleValues {
                     valueString = "<\(possibleValues.reduce("") { $0 + $1 + "," }.dropLast(1))>"
                 } else {

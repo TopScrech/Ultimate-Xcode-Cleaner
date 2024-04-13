@@ -1,18 +1,8 @@
-//
-//  URL+AcquireAccessFromSandbox.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 16.09.2018.
-//  Copyright © 2018 One Minute Games. All rights reserved.
-//
-
 import Foundation
 import Cocoa
 
-//
-// An article that tries to describe intricacies of sanbos file access:
+// An article that tries to describe intricacies of sanbox file access:
 // https://benscheirman.com/2019/10/troubleshooting-appkit-file-permissions/
-//
 
 extension URL {
     private struct SandboxFolderAccessError: Error {
@@ -83,8 +73,8 @@ extension URL {
         if let folderUrl = openPanel.urls.first {
             if folderUrl != self {
                 Alerts.infoAlert(title: "Can't get access to \(self.path) folder",
-                               message: "Did you choose the right folder?",
-                          okButtonText: "Repeat")
+                                 message: "Did you choose the right folder?",
+                                 okButtonText: "Repeat")
                 
                 return self.acquireAccessFromSandbox(bookmark: nil, allowCancel: allowCancel, openPanelMessage: openPanelMessage)
             }

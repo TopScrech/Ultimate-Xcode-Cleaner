@@ -1,24 +1,3 @@
-//
-//  XcodeFileEntry.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 10.03.2018.
-//  Copyright © 2018 One Minute Games. All rights reserved.
-//
-//  DevCleaner is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  DevCleaner is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
-
-import Foundation
 import Cocoa
 
 open class XcodeFileEntry: NSObject {
@@ -28,10 +7,10 @@ open class XcodeFileEntry: NSObject {
         
         public var numberOfBytes: Int64? {
             switch self {
-                case .value(let bytes):
-                    return bytes
-                default:
-                    return nil
+            case .value(let bytes):
+                return bytes
+            default:
+                return nil
             }
         }
     }
@@ -63,13 +42,13 @@ open class XcodeFileEntry: NSObject {
         var result: Int64 = 0
         
         // sizes of children
-        for item in self.items {
+        for item in items {
             result += item.selectedSize
         }
         
         // own size (only if selected and we have paths)
-        if self.selection == .on && self.paths.count > 0 {
-            result += self.size.numberOfBytes ?? 0
+        if selection == .on && paths.count > 0 {
+            result += size.numberOfBytes ?? 0
         }
         
         return result
@@ -81,15 +60,15 @@ open class XcodeFileEntry: NSObject {
     public private(set) var items: [XcodeFileEntry]
     
     public var numberOfNonEmptyItems: Int {
-        return self.items.filter { !$0.isEmpty }.count
+        items.filter { !$0.isEmpty }.count
     }
     
     public var isEmpty: Bool {
-        return (self.items.count == 0 && self.paths.count == 0)
+        items.count == 0 && paths.count == 0
     }
     
     public var isSelected: Bool {
-        return self.selection != .off
+        selection != .off
     }
     
     // MARK: Initialization
@@ -112,18 +91,18 @@ open class XcodeFileEntry: NSObject {
     // MARK: Manage children
     public func addChild(item: XcodeFileEntry) {
         // you can add path only if we have no children
-        guard self.paths.count == 0 else {
+        guard paths.count == 0 else {
             assertionFailure("❌ Cannot add child item to XcodeFileEntry if we already have paths!")
             return
         }
         
         item.parent = self
-        self.items.append(item)
+        items.append(item)
     }
     
     public func addChildren(items: [XcodeFileEntry]) {
         // you can add path only if we have no children
-        guard self.paths.count == 0 else {
+        guard paths.count == 0 else {
             assertionFailure("❌ Cannot add children items to XcodeFileEntry if we already have paths!")
             return
         }
@@ -136,37 +115,39 @@ open class XcodeFileEntry: NSObject {
     }
     
     public func removeAllChildren() {
-        self.items.removeAll()
+        items.removeAll()
     }
     
     // MARK: Manage paths
     public func addPath(path: URL) {
         // you can add path only if we have no children
-        guard self.items.count == 0 else {
+        guard items.count == 0 else {
             assertionFailure("❌ Cannot add paths to XcodeFileEntry if we already have children!")
             return
         }
         
-        self.paths.append(path)
+        paths.append(path)
     }
     
     public func addPaths(paths: [URL]) {
         for path in paths {
-            self.addPath(path: path)
+            addPath(path: path)
         }
     }
     
     // MARK: Selection
     public func selectWithChildItems() {
-        self.selection = .on
-        for item in self.items {
+        selection = .on
+        
+        for item in items {
             item.selectWithChildItems()
         }
     }
     
     public func deselectWithChildItems() {
-        self.selection = .off
-        for item in self.items {
+        selection = .off
+        
+        for item in items {
             item.deselectWithChildItems()
         }
     }
@@ -177,7 +158,7 @@ open class XcodeFileEntry: NSObject {
         var result: Int64 = 0
         
         // calculate sizes of children
-        for item in self.items {
+        for item in items {
             if let size = item.recalculateSize(), let sizeInBytes = size.numberOfBytes {
                 result += sizeInBytes
             }
@@ -185,7 +166,8 @@ open class XcodeFileEntry: NSObject {
         
         // calculate own size
         let fileManager = FileManager.default
-        for pathUrl in self.paths {
+        
+        for pathUrl in paths {
             if let dirSize = try? fileManager.allocatedSizeOfDirectory(atUrl: pathUrl) {
                 result += dirSize
             } else if let fileSize = try? fileManager.allocatedSizeOfFile(at: pathUrl) {
@@ -193,14 +175,15 @@ open class XcodeFileEntry: NSObject {
             }
         }
         
-        self.size = .value(result)
-        return self.size
+        size = .value(result)
+        
+        return size
     }
     
     @discardableResult
     public func recalculateSizeIfNeeded() -> Size? {
-        guard case .value(let size) = self.size else {
-            return self.recalculateSize()
+        guard case .value(let size) = size else {
+            return recalculateSize()
         }
         
         return .value(size)
@@ -211,18 +194,18 @@ open class XcodeFileEntry: NSObject {
         var result: Selection
         
         // calculate selection for child items
-        for item in self.items {
+        for item in items {
             item.recalculateSelection()
         }
         
         // calculate own selection
-        if self.numberOfNonEmptyItems > 0 {
-            let selectedItems = self.items.reduce(0) { (result, item) -> Int in
+        if numberOfNonEmptyItems > 0 {
+            let selectedItems = items.reduce(0) { (result, item) -> Int in
                 return result + (item.isSelected ? 1 : 0)
             }
             
-            if selectedItems == self.numberOfNonEmptyItems {
-                if self.items.filter( { $0.selection == .mixed } ).count > 0 {
+            if selectedItems == numberOfNonEmptyItems {
+                if items.filter({ $0.selection == .mixed }).count > 0 {
                     result = .mixed
                 } else {
                     result = .on
@@ -234,21 +217,21 @@ open class XcodeFileEntry: NSObject {
             }
         } else {
             // with no items use current selection or deselect if its empty
-            if self.isEmpty {
+            if isEmpty {
                 result = .off
             } else {
-                result = self.selection
+                result = selection
             }
         }
         
-        self.selection = result
+        selection = result
         return result
     }
     
     public func clear() {
-        self.removeAllChildren()
-        self.paths.removeAll()
-        self.size = .unknown
+        removeAllChildren()
+        paths.removeAll()
+        size = .unknown
     }
     
     public func debugRepresentation(level: Int = 1) -> String {
@@ -256,14 +239,16 @@ open class XcodeFileEntry: NSObject {
         
         // print own
         result += String(repeating: "\t", count: level)
-        result += " \(self.label)"
-        if let sizeInBytes = self.size.numberOfBytes {
+        result += " \(label)"
+        
+        if let sizeInBytes = size.numberOfBytes {
             result += ": \(ByteCountFormatter.string(fromByteCount: sizeInBytes, countStyle: .file))"
         }
+        
         result += "\n"
         
         // print children
-        for item in self.items {
+        for item in items {
             result += item.debugRepresentation(level: level + 1)
         }
         

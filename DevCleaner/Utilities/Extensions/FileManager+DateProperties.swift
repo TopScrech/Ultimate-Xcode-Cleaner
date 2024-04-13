@@ -1,11 +1,3 @@
-//
-//  FileManager+DateProperties.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 09/11/2019.
-//  Copyright © 2019 One Minute Games. All rights reserved.
-//
-
 import Foundation
 
 extension FileManager {

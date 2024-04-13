@@ -1,25 +1,4 @@
-//
-//  XcodeFiles.swift
-//  DevCleaner
-//
-//  Created by Konrad Kołakowski on 10.03.2018.
-//  Copyright © 2018 One Minute Games. All rights reserved.
-//
-//  DevCleaner is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  DevCleaner is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
-
 import Foundation
-import Cocoa
 
 // MARK: Xcode scan delegate
 public protocol XcodeFilesScanDelegate: AnyObject {
@@ -39,11 +18,18 @@ public protocol XcodeFilesDeleteDelegate: AnyObject {
 final public class XcodeFiles {
     // MARK: Types
     public enum Location: Int, CaseIterable {
-        case deviceSupport, archives, derivedData, documentationCache, logs, oldDocumentation
+        case deviceSupport,
+             archives,
+             derivedData,
+             documentationCache,
+             logs,
+             oldDocumentation
     }
     
     public enum State {
-        case initial, scanning, scanComplete
+        case initial,
+             scanning,
+             scanComplete
     }
     
     // MARK: Constants
@@ -65,35 +51,35 @@ final public class XcodeFiles {
     public private(set) var locations: [Location : XcodeFileEntry]
     
     public var totalSize: Int64 {
-        return locations.values.reduce(0) { (result, entry) -> Int64 in
-            return result + (entry.size.numberOfBytes ?? 0)
+        locations.values.reduce(0) { (result, entry) -> Int64 in
+            result + (entry.size.numberOfBytes ?? 0)
         }
     }
     
     public var selectedSize: Int64 {
-        return locations.values.reduce(0) { (result, entry) -> Int64 in
-            return result + entry.selectedSize
+        locations.values.reduce(0) { (result, entry) -> Int64 in
+            result + entry.selectedSize
         }
     }
     
     // MARK: Initialization
     public init?(developerFolder: URL, customDerivedDataFolder: URL?, customArchivesFolder: URL?) {
-        self.state = .initial
+        state = .initial
         
-        self.userDeveloperFolderUrl = developerFolder
-        self.customDerivedDataFolderUrl = customDerivedDataFolder
-        self.customArchivesFolderUrl = customArchivesFolder
+        userDeveloperFolderUrl = developerFolder
+        customDerivedDataFolderUrl = customDerivedDataFolder
+        customArchivesFolderUrl = customArchivesFolder
         
-        let _ = self.userDeveloperFolderUrl.startAccessingSecurityScopedResource()
-        let _ = self.customDerivedDataFolderUrl?.startAccessingSecurityScopedResource()
-        let _ = self.customArchivesFolderUrl?.startAccessingSecurityScopedResource()
+        let _ = userDeveloperFolderUrl.startAccessingSecurityScopedResource()
+        let _ = customDerivedDataFolderUrl?.startAccessingSecurityScopedResource()
+        let _ = customArchivesFolderUrl?.startAccessingSecurityScopedResource()
         
         guard XcodeFiles.checkForXcodeDataFolders(location: developerFolder) else {
             log.error("XcodeFiles: Cannot create because Xcode cache folders doesn't seem to exist or we don't have proper access to them!")
             return nil
         }
         
-        self.locations = [
+        locations = [
             .deviceSupport: XcodeFileEntry(label: "Device Support", tooltipText: "Systems debug symbols that are retained every version, usually you need only the newer ones", tooltip: true, selected: false),
             .archives: XcodeFileEntry(label: "Archives", tooltipText: "Archived apps, delete only if you sure you don't need them", tooltip: true, selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", tooltipText: "Cached projects data & symbol index", tooltip: true, selected: false),
@@ -104,29 +90,29 @@ final public class XcodeFiles {
     }
     
     deinit {
-        self.userDeveloperFolderUrl.stopAccessingSecurityScopedResource()
-        self.customDerivedDataFolderUrl?.stopAccessingSecurityScopedResource()
-        self.customArchivesFolderUrl?.stopAccessingSecurityScopedResource()
+        userDeveloperFolderUrl.stopAccessingSecurityScopedResource()
+        customDerivedDataFolderUrl?.stopAccessingSecurityScopedResource()
+        customArchivesFolderUrl?.stopAccessingSecurityScopedResource()
     }
     
     // MARK: Helpers
     public static func isDeveloperFolderExists() -> Bool {
-        let developerFolder = Files.userDeveloperFolder
+        let developerFolder = Files.userDeveloperFolder.path
         
-        return FileManager.default.fileExists(atPath: developerFolder.path)
+        return FileManager.default.fileExists(atPath: developerFolder)
     }
     
     public static func isXcodeRunning() -> Bool {
-        #if DEBUG
+#if DEBUG
         return false
-        #else
+#else
         
         let runningXcodeApp = NSWorkspace.shared.runningApplications.first {
             return $0.bundleIdentifier == "com.apple.dt.Xcode"
         }
         
         return runningXcodeApp != nil
-        #endif
+#endif
     }
     
     private static func checkForXcodeDataFolders(location: URL) -> Bool {
@@ -180,7 +166,7 @@ final public class XcodeFiles {
     public func debugRepresentation() -> String {
         var result = String()
         
-        for entry in self.locations.values {
+        for entry in locations.values {
             result += entry.debugRepresentation()
             result += "\n"
         }
@@ -233,6 +219,7 @@ final public class XcodeFiles {
             
             if splitted.count > 2 {
                 buildString = String(splitted[2])
+                
                 if splitted.count > 3 {
                     arch = String(splitted[3])
                 } else {
@@ -249,19 +236,22 @@ final public class XcodeFiles {
         
         // create build version
         let build: AppleBuild?
+        
         if let buildString {
             build = AppleBuild(string: buildString)
         } else {
             build = nil
         }
         
-        return DeviceSupportFileEntry(device: device,
-                                      osType: DeviceSupportFileEntry.OSType(label: osLabel),
-                                      version: version,
-                                      build: build,
-                                      date: creationDate,
-                                      arch: arch,
-                                      selected: false)
+        return DeviceSupportFileEntry(
+            device: device,
+            osType: DeviceSupportFileEntry.OSType(label: osLabel),
+            version: version,
+            build: build,
+            date: creationDate,
+            arch: arch,
+            selected: false
+        )
     }
     
     private func derivedDataEntry(from location: URL) -> DerivedDataFileEntry? {
@@ -373,14 +363,16 @@ final public class XcodeFiles {
             return nil
         }
         
-        return ArchiveFileEntry(projectName: projectName,
-                                bundleName: bundleName,
-                                version: bundleVersionString,
-                                build: bundleBuild,
-                                date: archiveDate,
-                                submissionStatus: status,
-                                location: location,
-                                selected: false)
+        return ArchiveFileEntry(
+            projectName: projectName,
+            bundleName: bundleName,
+            version: bundleVersionString,
+            build: bundleBuild,
+            date: archiveDate,
+            submissionStatus: status,
+            location: location,
+            selected: false
+        )
     }
     
     // MARK: Clearing items
@@ -393,21 +385,21 @@ final public class XcodeFiles {
     // MARK: Updating required data
     public func updateCustomFolders(customDerivedDataFolder: URL?, customArchivesFolder: URL?) {
         // clear old security access
-        self.customDerivedDataFolderUrl?.stopAccessingSecurityScopedResource()
-        self.customArchivesFolderUrl?.stopAccessingSecurityScopedResource()
+        customDerivedDataFolderUrl?.stopAccessingSecurityScopedResource()
+        customArchivesFolderUrl?.stopAccessingSecurityScopedResource()
         
         // update folders
-        self.customDerivedDataFolderUrl = customDerivedDataFolder
-        self.customArchivesFolderUrl = customArchivesFolder
+        customDerivedDataFolderUrl = customDerivedDataFolder
+        customArchivesFolderUrl = customArchivesFolder
         
         // restart security scope access
-        let _ = self.customDerivedDataFolderUrl?.startAccessingSecurityScopedResource()
-        let _ = self.customArchivesFolderUrl?.startAccessingSecurityScopedResource()
+        let _ = customDerivedDataFolderUrl?.startAccessingSecurityScopedResource()
+        let _ = customArchivesFolderUrl?.startAccessingSecurityScopedResource()
     }
     
     // MARK: Scan files
     public func scanFiles(in locations: [Location]) {
-        self.state = .scanning
+        state = .scanning
         
         DispatchQueue.main.async { [weak self] in
             if let strongSelf = self {
@@ -415,13 +407,13 @@ final public class XcodeFiles {
             }
         }
         
-        self.cleanAllEntries()
+        cleanAllEntries()
         
         for location in locations {
-            self.scanFiles(in: location)
+            scanFiles(in: location)
         }
         
-        self.state = .scanComplete
+        state = .scanComplete
         
         DispatchQueue.main.async { [weak self] in
             if let strongSelf = self {
@@ -431,8 +423,8 @@ final public class XcodeFiles {
     }
     
     private func scanFiles(in location: Location) {
-        guard let entry = self.locations[location] else {
-            precondition(self.locations.keys.contains(location), "❌ No entry found for location: \(location)")
+        guard let entry = locations[location] else {
+            precondition(locations.keys.contains(location), "❌ No entry found for location: \(location)")
             return
         }
         
@@ -441,24 +433,24 @@ final public class XcodeFiles {
         
         // scan and find files
         switch location {
-            case .deviceSupport:
-                entry.addChildren(items: self.scanDeviceSupportLocations())
+        case .deviceSupport:
+            entry.addChildren(items: scanDeviceSupportLocations())
             
-            case .archives:
-                entry.addChildren(items: self.scanArchivesLocations())
+        case .archives:
+            entry.addChildren(items: scanArchivesLocations())
             
-            case .derivedData:
-                entry.addChildren(items: self.scanDerivedDataLocations())
+        case .derivedData:
+            entry.addChildren(items: scanDerivedDataLocations())
             
-            case .documentationCache:
-                entry.addChildren(items: self.scanDocumentationCacheLocations())
-                
-            case .logs:
-                entry.addChildren(items: self.scanLogsLocations())
-                
+        case .documentationCache:
+            entry.addChildren(items: scanDocumentationCacheLocations())
+            
+        case .logs:
+            entry.addChildren(items: scanLogsLocations())
+            
             // different for those, as we don't have an option to select separate entries here
-            case .oldDocumentation:
-                entry.addPaths(paths: self.scanOldDocumentationLocations())
+        case .oldDocumentation:
+            entry.addPaths(paths: scanOldDocumentationLocations())
         }
         
         // check for those files sizes
@@ -476,8 +468,8 @@ final public class XcodeFiles {
             (entry: XcodeFileEntry(label: "visionOS", icon: .image(name: "Devices/VisionProIcon"), selected: true), path: "visionOS DeviceSupport"),
             (entry: XcodeFileEntry(label: "macOS", icon: .image(name: "Devices/MacBookIcon"), selected: true), path: "macOS DeviceSupport")
         ]
-                
-        let xcodeLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode")
+        
+        let xcodeLocation = userDeveloperFolderUrl.appendingPathComponent("Xcode")
         var entries: [XcodeFileEntry] = []
         for osEntry in deviceSupportEntries {
             let entryUrl = xcodeLocation.appendingPathComponent(osEntry.path)
@@ -486,7 +478,7 @@ final public class XcodeFiles {
             if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil, options: Self.scanFileEnumerationOptions) {
                 var deviceSupportEntries = [DeviceSupportFileEntry]()
                 for symbolUrl in symbols {
-                    if let deviceSupportEntry = self.deviceSupportEntry(from: symbolUrl, osLabel: osEntry.entry.label) {
+                    if let deviceSupportEntry = deviceSupportEntry(from: symbolUrl, osLabel: osEntry.entry.label) {
                         deviceSupportEntry.addPath(path: symbolUrl)
                         
                         deviceSupportEntries.append(deviceSupportEntry)
@@ -545,9 +537,9 @@ final public class XcodeFiles {
     
     private func scanArchivesLocations() -> [XcodeFileEntry] {
         var archiveLocations = [URL]()
-        archiveLocations.append(self.userDeveloperFolderUrl.appendingPathComponent("Xcode/Archives"))
+        archiveLocations.append(userDeveloperFolderUrl.appendingPathComponent("Xcode/Archives"))
         
-        if let customArchivesLocation = self.customArchivesFolderUrl {
+        if let customArchivesLocation = customArchivesFolderUrl {
             if !archiveLocations.contains(customArchivesLocation) {
                 archiveLocations.append(customArchivesLocation)
             }
@@ -560,7 +552,7 @@ final public class XcodeFiles {
                 for dateFolder in datesFolders {
                     if let xcarchives = try? FileManager.default.contentsOfDirectory(at: dateFolder, includingPropertiesForKeys: nil, options: Self.scanFileEnumerationOptions) {
                         for xcarchive in xcarchives {
-                            if let xcarchiveEntry = self.archiveFileEntry(from: xcarchive) {
+                            if let xcarchiveEntry = archiveFileEntry(from: xcarchive) {
                                 if archiveInfos.keys.contains(xcarchiveEntry.bundleName) {
                                     archiveInfos[xcarchiveEntry.bundleName]?.append(xcarchiveEntry)
                                 } else {
@@ -605,9 +597,9 @@ final public class XcodeFiles {
     
     private func scanDerivedDataLocations() -> [XcodeFileEntry] {
         var derivedDataLocations = [URL]()
-        derivedDataLocations.append(self.userDeveloperFolderUrl.appendingPathComponent("Xcode/DerivedData"))
+        derivedDataLocations.append(userDeveloperFolderUrl.appendingPathComponent("Xcode/DerivedData"))
         
-        if let customDerivedDataLocation = self.customDerivedDataFolderUrl {
+        if let customDerivedDataLocation = customDerivedDataFolderUrl {
             if !derivedDataLocations.contains(customDerivedDataLocation) {
                 derivedDataLocations.append(customDerivedDataLocation)
             }
@@ -623,7 +615,7 @@ final public class XcodeFiles {
                         continue
                     }
                     
-                    if let projectEntry = self.derivedDataEntry(from: projectFolder) {
+                    if let projectEntry = derivedDataEntry(from: projectFolder) {
                         projectEntry.addPath(path: projectFolder)
                         
                         results.append(projectEntry)
@@ -645,7 +637,7 @@ final public class XcodeFiles {
     }
     
     private func scanDocumentationCacheLocations() -> [XcodeFileEntry] {
-        let docsCacheLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/DocumentationCache")
+        let docsCacheLocation = userDeveloperFolderUrl.appendingPathComponent("Xcode/DocumentationCache")
         
         var entries = [DocumentationCacheFileEntry]()
         
@@ -708,7 +700,7 @@ final public class XcodeFiles {
                 }
                 
                 if let finalFoundVersion = foundVersion {
-                    self.version = finalFoundVersion
+                    version = finalFoundVersion
                 } else {
                     log.warning("XcodeFiles: Wrong log entry? Version not found (path: \(filename)")
                     return nil
@@ -717,7 +709,7 @@ final public class XcodeFiles {
         }
         
         // get location
-        let logsLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/iOS Device Logs")
+        let logsLocation = userDeveloperFolderUrl.appendingPathComponent("Xcode/iOS Device Logs")
         
         // get all log entries from logs folder
         var logs = [LogEntry]()
@@ -757,20 +749,20 @@ final public class XcodeFiles {
     
     private func scanOldDocumentationLocations() -> [URL] {
         // get location
-        let docsLocation = self.userDeveloperFolderUrl.appendingPathComponent("Shared/Documentation")
+        let docsLocation = userDeveloperFolderUrl.appendingPathComponent("Shared/Documentation")
         
         return [docsLocation]
     }
     
     // MARK: Deleting files
     public func deleteSelectedEntries(dryRun: Bool) {
-        self.deleteDelegate?.deleteWillBegin(xcodeFiles: self)
+        deleteDelegate?.deleteWillBegin(xcodeFiles: self)
         
         // gather a list of items to delete
         typealias DeletionItem = (location: String, label: String, path: URL)
         var itemsToDelete = [DeletionItem]()
         
-        for location in self.locations.values where location.isSelected {
+        for location in locations.values where location.isSelected {
             var searchStack = Stack<XcodeFileEntry>()
             searchStack.push(location)
             
@@ -778,7 +770,10 @@ final public class XcodeFiles {
             while !searchStack.isEmpty {
                 if let currentEntry = searchStack.pop() {
                     if currentEntry.isSelected && currentEntry.paths.count > 0 {
-                        let pathsFromNode = currentEntry.paths.map { DeletionItem(location: location.label, label: currentEntry.fullDescription, path: $0) }
+                        let pathsFromNode = currentEntry.paths.map { 
+                            DeletionItem(location: location.label, label: currentEntry.fullDescription, path: $0)
+                        }
+                        
                         itemsToDelete.append(contentsOf: pathsFromNode)
                     }
                     
@@ -794,15 +789,18 @@ final public class XcodeFiles {
         
         let itemsCount = itemsToDelete.count
         var ordinal = 0
+        
         for itemToDelete in itemsToDelete {
             ordinal += 1
-
-            self.deleteDelegate?.deleteInProgress(xcodeFiles: self,
-                                                    location: itemToDelete.location,
-                                                       label: itemToDelete.label,
-                                                         url: itemToDelete.path,
-                                                     current: ordinal,
-                                                       total: itemsCount)
+            
+            deleteDelegate?.deleteInProgress(
+                xcodeFiles: self,
+                location: itemToDelete.location,
+                label: itemToDelete.label,
+                url: itemToDelete.path,
+                current: ordinal,
+                total: itemsCount
+            )
             
             log.info("Deleting \(dryRunInfo): \(itemToDelete.location): \(itemToDelete.label) (\(itemToDelete.path.path))")
             
@@ -812,15 +810,17 @@ final public class XcodeFiles {
                 do {
                     try FileManager.default.removeItem(at: itemToDelete.path)
                 } catch(let error) {
-                    self.deleteDelegate?.deleteItemFailed(xcodeFiles: self,
-                                                               error: error,
-                                                            location: itemToDelete.location,
-                                                               label: itemToDelete.label,
-                                                                 url: itemToDelete.path)
+                    deleteDelegate?.deleteItemFailed(
+                        xcodeFiles: self,
+                        error: error,
+                        location: itemToDelete.location,
+                        label: itemToDelete.label,
+                        url: itemToDelete.path
+                    )
                 }
             }
         }
         
-        self.deleteDelegate?.deleteDidFinish(xcodeFiles: self)
+        deleteDelegate?.deleteDidFinish(xcodeFiles: self)
     }
 }
