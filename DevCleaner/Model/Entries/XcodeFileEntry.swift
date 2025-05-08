@@ -8,9 +8,10 @@ open class XcodeFileEntry: NSObject {
         public var numberOfBytes: Int64? {
             switch self {
             case .value(let bytes):
-                return bytes
+                bytes
+                
             default:
-                return nil
+                nil
             }
         }
     }
@@ -33,7 +34,7 @@ open class XcodeFileEntry: NSObject {
     public let tooltip: Bool
     
     public var fullDescription: String {
-        return "\(label) \(extraInfo)"
+        "\(label) \(extraInfo)"
     }
     
     public private(set) var selection: Selection

@@ -9,14 +9,19 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
             switch label {
             case "iOS":
                 self = .iOS
+                
             case "watchOS":
                 self = .watchOS
+                
             case "tvOS":
                 self = .tvOS
+                
             case "macOS":
                 self = .macOS
+                
             case "visionOS":
                 self = .visionOS
+                
             default:
                 self = .other
             }

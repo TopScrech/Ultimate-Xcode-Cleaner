@@ -37,7 +37,9 @@ extension FileManager {
         // Start the traversal:
         while let contentURL = (enumerator?.nextObject() as? URL)  {
             // Bail out on errors from the errorHandler.
-            if let error = errorDidOccur { throw error }
+            if let error = errorDidOccur { 
+                throw error
+            }
             
             // Get the type of this item, making sure we only sum up sizes of regular files.
             let isRegularFileResourceValues = try contentURL.resourceValues(forKeys: [.isRegularFileKey])

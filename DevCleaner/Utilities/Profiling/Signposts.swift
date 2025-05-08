@@ -14,6 +14,7 @@ public final class Signposts {
     // MARK: Helpers
     private static func placeSignpost(type: OSSignpostType, name: StaticString, details: String, object: AnyObject?) {
         let spid: OSSignpostID
+        
         if let objectForSpid = object {
             spid = OSSignpostID(log: Signposts.signpostLog, object: objectForSpid)
         } else {

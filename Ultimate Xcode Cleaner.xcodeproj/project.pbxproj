@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -123,12 +123,10 @@
 /* Begin PBXFrameworksBuildPhase section */
 		7110B48B2030F17B00EDBFA3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				71AE37F1237A1FAE009C03BB /* WebKit.framework in Frameworks */,
 				7164260C20B8903000D47EF2 /* StoreKit.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -354,8 +352,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = "Ultimate Xcode Cleaner";
 			productName = XcodeCleaner;
 			productReference = 7110B48E2030F17B00EDBFA3 /* Ultimate Xcode Cleaner.app */;
@@ -369,8 +365,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1520;
-				ORGANIZATIONNAME = "One Minute Games";
+				LastUpgradeCheck = 1640;
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					7110B48D2030F17B00EDBFA3 = {
 						CreatedOnToolsVersion = 9.2;
@@ -391,7 +387,6 @@
 				};
 			};
 			buildConfigurationList = 7110B4892030F17B00EDBFA3 /* Build configuration list for PBXProject "Ultimate Xcode Cleaner" */;
-			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -399,6 +394,7 @@
 				Base,
 			);
 			mainGroup = 7110B4852030F17B00EDBFA3;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 7110B48F2030F17B00EDBFA3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -411,7 +407,6 @@
 /* Begin PBXResourcesBuildPhase section */
 		7110B48C2030F17B00EDBFA3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				7162E1292097624600081E4E /* Preferences.storyboard in Resources */,
 				71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */,
@@ -422,7 +417,6 @@
 				7140B61A231BC697005768A7 /* Manual in Resources */,
 				71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
@@ -430,24 +424,31 @@
 		71C8ACDC20A2428E00E7A13B /* Update build number */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-			);
 			name = "Update build number";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\ngit=$(sh /etc/profile; which git)\nnumber_of_commits=$(\"$git\" rev-list HEAD --count)\n\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\nif [ -f \"$plist\" ]; then\necho \"Setting build number to: $number_of_commits\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"\nfi\ndone\n";
+			shellScript = (
+				"#!/bin/bash",
+				"",
+				"git=$(sh /etc/profile; which git)",
+				"number_of_commits=$(\"$git\" rev-list HEAD --count)",
+				"",
+				"target_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"",
+				"dsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"",
+				"",
+				"for plist in \"$target_plist\" \"$dsym_plist\"; do",
+				"if [ -f \"$plist\" ]; then",
+				"echo \"Setting build number to: $number_of_commits\"",
+				"/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"",
+				"fi",
+				"done",
+				"",
+			);
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7110B48A2030F17B00EDBFA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				718D4ABC2311DE66001E9382 /* ArgumentsParser.swift in Sources */,
 				71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */,
@@ -491,7 +492,6 @@
 				7185E5D320D0775200C1C918 /* DonationViewController.swift in Sources */,
 				7110B4922030F17B00EDBFA3 /* AppDelegate.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -507,7 +507,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7110B49C2030F17B00EDBFA3 /* Debug */ = {
+		7110B49C2030F17B00EDBFA3 /* Debug configuration for PBXProject "Ultimate Xcode Cleaner" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -543,8 +543,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -568,7 +570,7 @@
 			};
 			name = Debug;
 		};
-		7110B49D2030F17B00EDBFA3 /* Release */ = {
+		7110B49D2030F17B00EDBFA3 /* Release configuration for PBXProject "Ultimate Xcode Cleaner" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -604,8 +606,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -622,7 +626,7 @@
 			};
 			name = Release;
 		};
-		7110B49F2030F17B00EDBFA3 /* Debug */ = {
+		7110B49F2030F17B00EDBFA3 /* Debug configuration for PBXNativeTarget "Ultimate Xcode Cleaner" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -630,8 +634,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/DevCleaner/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Xcode Cleaner";
@@ -648,7 +652,7 @@
 			};
 			name = Debug;
 		};
-		7110B4A02030F17B00EDBFA3 /* Release */ = {
+		7110B4A02030F17B00EDBFA3 /* Release configuration for PBXNativeTarget "Ultimate Xcode Cleaner" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -656,8 +660,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/DevCleaner/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Xcode Cleaner";
@@ -680,19 +684,17 @@
 		7110B4892030F17B00EDBFA3 /* Build configuration list for PBXProject "Ultimate Xcode Cleaner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7110B49C2030F17B00EDBFA3 /* Debug */,
-				7110B49D2030F17B00EDBFA3 /* Release */,
+				7110B49C2030F17B00EDBFA3 /* Debug configuration for PBXProject "Ultimate Xcode Cleaner" */,
+				7110B49D2030F17B00EDBFA3 /* Release configuration for PBXProject "Ultimate Xcode Cleaner" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		7110B49E2030F17B00EDBFA3 /* Build configuration list for PBXNativeTarget "Ultimate Xcode Cleaner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7110B49F2030F17B00EDBFA3 /* Debug */,
-				7110B4A02030F17B00EDBFA3 /* Release */,
+				7110B49F2030F17B00EDBFA3 /* Debug configuration for PBXNativeTarget "Ultimate Xcode Cleaner" */,
+				7110B4A02030F17B00EDBFA3 /* Release configuration for PBXNativeTarget "Ultimate Xcode Cleaner" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
