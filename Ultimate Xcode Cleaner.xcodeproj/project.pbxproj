@@ -7,118 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7100BEE222F6E771002E82B2 /* Signposts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100BEE022F6E770002E82B2 /* Signposts.swift */; };
-		7100BEE322F6E771002E82B2 /* Profiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100BEE122F6E771002E82B2 /* Profiler.swift */; };
-		71012FA9230C8A9E00FDF8ED /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71012FA8230C8A9E00FDF8ED /* main.swift */; };
-		71012FAC230C928600FDF8ED /* CmdLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71012FAB230C928600FDF8ED /* CmdLine.swift */; };
-		710C965427BBE09200A1DA6A /* AppleBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710C965327BBE09200A1DA6A /* AppleBuild.swift */; };
-		7110B4922030F17B00EDBFA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4912030F17B00EDBFA3 /* AppDelegate.swift */; };
-		7110B4942030F17B00EDBFA3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4932030F17B00EDBFA3 /* MainViewController.swift */; };
-		7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4952030F17B00EDBFA3 /* Assets.xcassets */; };
-		7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4972030F17B00EDBFA3 /* Main.storyboard */; };
-		712F999E20D65229003927BC /* Donations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F999D20D65229003927BC /* Donations.swift */; };
-		712F99A020D6810A003927BC /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F999F20D6810A003927BC /* MessageView.swift */; };
-		7140B617231A81DC005768A7 /* ReviewRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7140B616231A81DC005768A7 /* ReviewRequests.swift */; };
-		7140B61A231BC697005768A7 /* Manual in Resources */ = {isa = PBXBuildFile; fileRef = 7140B619231BC697005768A7 /* Manual */; };
-		7140B61D231BE5FB005768A7 /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7140B61C231BE5FB005768A7 /* Help.storyboard */; };
-		7140B61F2323E1F7005768A7 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7140B61E2323E1F7005768A7 /* HelpViewController.swift */; };
-		714AB65F22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714AB65E22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift */; };
-		7155325E2061AFD80025EB75 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155325D2061AFD80025EB75 /* Logger.swift */; };
-		715E8C3D216566FD0059A2E5 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715E8C3C216566FD0059A2E5 /* Weak.swift */; };
-		7162E12420966D1500081E4E /* CleaningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12320966D1500081E4E /* CleaningViewController.swift */; };
-		7162E1262097255C00081E4E /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E1252097255C00081E4E /* Stack.swift */; };
-		7162E1292097624600081E4E /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7162E1282097624600081E4E /* Preferences.storyboard */; };
-		7162E12B209901FB00081E4E /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12A209901FB00081E4E /* PreferencesViewController.swift */; };
-		7162E12D209905BC00081E4E /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12C209905BC00081E4E /* Preferences.swift */; };
 		7164260C20B8903000D47EF2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7164260B20B8903000D47EF2 /* StoreKit.framework */; };
-		716667D0221A26BA004D4FC4 /* FileManager+HomeFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716667CF221A26BA004D4FC4 /* FileManager+HomeFolder.swift */; };
-		7169D2B027B32A8E00882E03 /* Digest+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169D2AF27B32A8E00882E03 /* Digest+Helpers.swift */; };
-		717A3EC928FC3DDC002A0C8F /* DocumentationCacheFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A3EC828FC3DDC002A0C8F /* DocumentationCacheFileEntry.swift */; };
-		717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */; };
-		717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717AB6B520C71F4D0096743C /* LoadingView.swift */; };
-		7185E5D320D0775200C1C918 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7185E5D220D0775200C1C918 /* DonationViewController.swift */; };
-		718D4ABC2311DE66001E9382 /* ArgumentsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */; };
-		718D4ABE23140ABA001E9382 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D4ABD23140ABA001E9382 /* Files.swift */; };
-		719B25D9205ECA53007560C0 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
-		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
-		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
-		71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */; };
-		71A2C1202668FB1200F502A0 /* FeedbackMailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A2C11F2668FB1200F502A0 /* FeedbackMailer.swift */; };
-		71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */ = {isa = PBXBuildFile; fileRef = 71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */; };
-		71AC3EB52B991024002B21A7 /* CommandLineInstall.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71AC3EB42B991024002B21A7 /* CommandLineInstall.storyboard */; };
-		71AC3EB72B991194002B21A7 /* CommandLineInstallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC3EB62B991194002B21A7 /* CommandLineInstallViewController.swift */; };
-		71AE37EF23776AFB009C03BB /* FileManager+DateProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */; };
 		71AE37F1237A1FAE009C03BB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AE37F0237A1FAE009C03BB /* WebKit.framework */; };
-		71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */; };
-		71B01E902082551000940041 /* SizeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8F2082551000940041 /* SizeCellView.swift */; };
-		71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71C8ACDD20A4EC2200E7A13B /* Credits.rtf */; };
-		71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */; };
-		71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */; };
-		71E7F838214E930500A11601 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F837214E930500A11601 /* Alerts.swift */; };
-		71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */; };
-		71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */; };
-		71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7100BEE022F6E770002E82B2 /* Signposts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signposts.swift; sourceTree = "<group>"; };
-		7100BEE122F6E771002E82B2 /* Profiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profiler.swift; sourceTree = "<group>"; };
-		71012FA8230C8A9E00FDF8ED /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		71012FAB230C928600FDF8ED /* CmdLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdLine.swift; sourceTree = "<group>"; };
-		710C965327BBE09200A1DA6A /* AppleBuild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleBuild.swift; sourceTree = "<group>"; };
 		7110B48E2030F17B00EDBFA3 /* Ultimate Xcode Cleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ultimate Xcode Cleaner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7110B4912030F17B00EDBFA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7110B4932030F17B00EDBFA3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		7110B4952030F17B00EDBFA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7110B4982030F17B00EDBFA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7110B49A2030F17B00EDBFA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7110B49B2030F17B00EDBFA3 /* DevCleaner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DevCleaner.entitlements; sourceTree = "<group>"; };
-		712F999D20D65229003927BC /* Donations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donations.swift; sourceTree = "<group>"; };
-		712F999F20D6810A003927BC /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
-		7140B616231A81DC005768A7 /* ReviewRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequests.swift; sourceTree = "<group>"; };
-		7140B619231BC697005768A7 /* Manual */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Manual; sourceTree = "<group>"; };
-		7140B61C231BE5FB005768A7 /* Help.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Help.storyboard; sourceTree = "<group>"; };
-		7140B61E2323E1F7005768A7 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
-		714AB65E22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLogsFileEntry.swift; sourceTree = "<group>"; };
-		7155325D2061AFD80025EB75 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		715E8C3C216566FD0059A2E5 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
-		7162E12320966D1500081E4E /* CleaningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleaningViewController.swift; sourceTree = "<group>"; };
-		7162E1252097255C00081E4E /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
-		7162E1282097624600081E4E /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
-		7162E12A209901FB00081E4E /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
-		7162E12C209905BC00081E4E /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		7164260420ACE2EC00D47EF2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7164260B20B8903000D47EF2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		716667CF221A26BA004D4FC4 /* FileManager+HomeFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+HomeFolder.swift"; sourceTree = "<group>"; };
-		7169D2AF27B32A8E00882E03 /* Digest+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Digest+Helpers.swift"; sourceTree = "<group>"; };
-		717A3EC828FC3DDC002A0C8F /* DocumentationCacheFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentationCacheFileEntry.swift; sourceTree = "<group>"; };
-		717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldDocumentationFileEntry.swift; sourceTree = "<group>"; };
-		717AB6B520C71F4D0096743C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		7185E5D220D0775200C1C918 /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		718788E220E9169D007375AA /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentsParser.swift; sourceTree = "<group>"; };
-		718D4ABD23140ABA001E9382 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
-		719B25D8205ECA53007560C0 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
-		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
-		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
-		71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFileEntry.swift; sourceTree = "<group>"; };
-		71A2C11F2668FB1200F502A0 /* FeedbackMailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMailer.swift; sourceTree = "<group>"; };
-		71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "dev-cleaner.sh"; sourceTree = "<group>"; };
-		71AC3EB42B991024002B21A7 /* CommandLineInstall.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CommandLineInstall.storyboard; sourceTree = "<group>"; };
-		71AC3EB62B991194002B21A7 /* CommandLineInstallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineInstallViewController.swift; sourceTree = "<group>"; };
-		71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DateProperties.swift"; sourceTree = "<group>"; };
 		71AE37F0237A1FAE009C03BB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeEntryCellView.swift; sourceTree = "<group>"; };
-		71B01E8F2082551000940041 /* SizeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCellView.swift; sourceTree = "<group>"; };
-		71B76BC52B222690002A2A03 /* DevCleanerStoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = DevCleanerStoreKit.storekit; sourceTree = "<group>"; };
-		71C8ACDD20A4EC2200E7A13B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
-		71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReminders.swift; sourceTree = "<group>"; };
-		71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+AcquireAccessFromSandbox.swift"; sourceTree = "<group>"; };
-		71E7F837214E930500A11601 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
-		71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFileEntry.swift; sourceTree = "<group>"; };
-		71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSupportFileEntry.swift; sourceTree = "<group>"; };
-		71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivedDataFileEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F3C1DD9A2F497ABE00D3D257 /* Exceptions for "DevCleaner" folder in "Ultimate Xcode Cleaner" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/DevCleanerStoreKit.storekit,
+				Resources/Info.plist,
+			);
+			target = 7110B48D2030F17B00EDBFA3 /* Ultimate Xcode Cleaner */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F3C1DD662F497ABD00D3D257 /* DevCleaner */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F3C1DD9A2F497ABE00D3D257 /* Exceptions for "DevCleaner" folder in "Ultimate Xcode Cleaner" target */,
+			);
+			explicitFolders = (
+				Resources/Manual,
+			);
+			path = DevCleaner;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7110B48B2030F17B00EDBFA3 /* Frameworks */ = {
@@ -131,21 +55,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7100BEDB22F6E4D5002E82B2 /* Profiling */ = {
-			isa = PBXGroup;
-			children = (
-				7100BEE122F6E771002E82B2 /* Profiler.swift */,
-				7100BEE022F6E770002E82B2 /* Signposts.swift */,
-			);
-			path = Profiling;
-			sourceTree = "<group>";
-		};
 		7110B4852030F17B00EDBFA3 = {
 			isa = PBXGroup;
 			children = (
-				718788E220E9169D007375AA /* LICENSE */,
 				7164260420ACE2EC00D47EF2 /* README.md */,
-				7110B4902030F17B00EDBFA3 /* DevCleaner */,
+				718788E220E9169D007375AA /* LICENSE */,
+				F3C1DD662F497ABD00D3D257 /* DevCleaner */,
 				7110B48F2030F17B00EDBFA3 /* Products */,
 				7164260A20B8903000D47EF2 /* Frameworks */,
 			);
@@ -159,75 +74,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7110B4902030F17B00EDBFA3 /* DevCleaner */ = {
-			isa = PBXGroup;
-			children = (
-				719B25D7205ECA40007560C0 /* Utilities */,
-				71A21A0A2053F5F500B55651 /* Model */,
-				7164260920B0A5C000D47EF2 /* Managers */,
-				717AB6B420C71F2E0096743C /* Views */,
-				71743ECA2078147B00EC0FE2 /* View Controllers */,
-				7110B4A22033A9CE00EDBFA3 /* Base */,
-				7110B4A12033A9C600EDBFA3 /* Resources */,
-			);
-			path = DevCleaner;
-			sourceTree = "<group>";
-		};
-		7110B4A12033A9C600EDBFA3 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				7140B619231BC697005768A7 /* Manual */,
-				7110B4952030F17B00EDBFA3 /* Assets.xcassets */,
-				7110B49A2030F17B00EDBFA3 /* Info.plist */,
-				7110B49B2030F17B00EDBFA3 /* DevCleaner.entitlements */,
-				71B76BC52B222690002A2A03 /* DevCleanerStoreKit.storekit */,
-				71C8ACDD20A4EC2200E7A13B /* Credits.rtf */,
-				71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		7110B4A22033A9CE00EDBFA3 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				7110B4912030F17B00EDBFA3 /* AppDelegate.swift */,
-				71012FAB230C928600FDF8ED /* CmdLine.swift */,
-				71012FA8230C8A9E00FDF8ED /* main.swift */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
-		7140B61B231BE5C5005768A7 /* Help Window */ = {
-			isa = PBXGroup;
-			children = (
-				7140B61C231BE5FB005768A7 /* Help.storyboard */,
-				7140B61E2323E1F7005768A7 /* HelpViewController.swift */,
-			);
-			path = "Help Window";
-			sourceTree = "<group>";
-		};
-		7162E1272097622B00081E4E /* Preferences Window */ = {
-			isa = PBXGroup;
-			children = (
-				7162E1282097624600081E4E /* Preferences.storyboard */,
-				7162E12A209901FB00081E4E /* PreferencesViewController.swift */,
-			);
-			path = "Preferences Window";
-			sourceTree = "<group>";
-		};
-		7164260920B0A5C000D47EF2 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */,
-				7162E12C209905BC00081E4E /* Preferences.swift */,
-				712F999D20D65229003927BC /* Donations.swift */,
-				718D4ABD23140ABA001E9382 /* Files.swift */,
-				7140B616231A81DC005768A7 /* ReviewRequests.swift */,
-				71A2C11F2668FB1200F502A0 /* FeedbackMailer.swift */,
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
 		7164260A20B8903000D47EF2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,107 +81,6 @@
 				7164260B20B8903000D47EF2 /* StoreKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		71743ECA2078147B00EC0FE2 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				71AC3EB32B990FD1002B21A7 /* Command Line Install Window */,
-				7140B61B231BE5C5005768A7 /* Help Window */,
-				7162E1272097622B00081E4E /* Preferences Window */,
-				71743ECB207815D300EC0FE2 /* Main Window */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		71743ECB207815D300EC0FE2 /* Main Window */ = {
-			isa = PBXGroup;
-			children = (
-				71B01E8C20824F0F00940041 /* Views */,
-				7110B4972030F17B00EDBFA3 /* Main.storyboard */,
-				7110B4932030F17B00EDBFA3 /* MainViewController.swift */,
-				7162E12320966D1500081E4E /* CleaningViewController.swift */,
-				7185E5D220D0775200C1C918 /* DonationViewController.swift */,
-			);
-			path = "Main Window";
-			sourceTree = "<group>";
-		};
-		717AB6B420C71F2E0096743C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				717AB6B520C71F4D0096743C /* LoadingView.swift */,
-				712F999F20D6810A003927BC /* MessageView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		719B25D7205ECA40007560C0 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				7100BEDB22F6E4D5002E82B2 /* Profiling */,
-				719B25DA205EF996007560C0 /* Extensions */,
-				719B25D8205ECA53007560C0 /* Version.swift */,
-				710C965327BBE09200A1DA6A /* AppleBuild.swift */,
-				7155325D2061AFD80025EB75 /* Logger.swift */,
-				71E7F837214E930500A11601 /* Alerts.swift */,
-				7162E1252097255C00081E4E /* Stack.swift */,
-				715E8C3C216566FD0059A2E5 /* Weak.swift */,
-				718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		719B25DA205EF996007560C0 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */,
-				716667CF221A26BA004D4FC4 /* FileManager+HomeFolder.swift */,
-				71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */,
-				71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */,
-				7169D2AF27B32A8E00882E03 /* Digest+Helpers.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		71A21A0A2053F5F500B55651 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				71FD37D5206AD67A0042812D /* Entries */,
-				71A21A0B20541BE800B55651 /* XcodeFiles.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		71AC3EB32B990FD1002B21A7 /* Command Line Install Window */ = {
-			isa = PBXGroup;
-			children = (
-				71AC3EB42B991024002B21A7 /* CommandLineInstall.storyboard */,
-				71AC3EB62B991194002B21A7 /* CommandLineInstallViewController.swift */,
-			);
-			path = "Command Line Install Window";
-			sourceTree = "<group>";
-		};
-		71B01E8C20824F0F00940041 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */,
-				71B01E8F2082551000940041 /* SizeCellView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		71FD37D5206AD67A0042812D /* Entries */ = {
-			isa = PBXGroup;
-			children = (
-				71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */,
-				71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */,
-				71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */,
-				71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */,
-				717A3EC828FC3DDC002A0C8F /* DocumentationCacheFileEntry.swift */,
-				714AB65E22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift */,
-				717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */,
-			);
-			path = Entries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,6 +97,9 @@
 			);
 			buildRules = (
 			);
+			fileSystemSynchronizedGroups = (
+				F3C1DD662F497ABD00D3D257 /* DevCleaner */,
+			);
 			name = "Ultimate Xcode Cleaner";
 			productName = XcodeCleaner;
 			productReference = 7110B48E2030F17B00EDBFA3 /* Ultimate Xcode Cleaner.app */;
@@ -365,7 +113,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1640;
+				LastUpgradeCheck = 2630;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					7110B48D2030F17B00EDBFA3 = {
@@ -408,14 +156,6 @@
 		7110B48C2030F17B00EDBFA3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
-				7162E1292097624600081E4E /* Preferences.storyboard in Resources */,
-				71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */,
-				71AC3EB52B991024002B21A7 /* CommandLineInstall.storyboard in Resources */,
-				7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */,
-				7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */,
-				7140B61D231BE5FB005768A7 /* Help.storyboard in Resources */,
-				7140B61A231BC697005768A7 /* Manual in Resources */,
-				71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */,
 			);
 		};
 /* End PBXResourcesBuildPhase section */
@@ -450,61 +190,9 @@
 		7110B48A2030F17B00EDBFA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
-				718D4ABC2311DE66001E9382 /* ArgumentsParser.swift in Sources */,
-				71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */,
-				71E7F838214E930500A11601 /* Alerts.swift in Sources */,
-				71AC3EB72B991194002B21A7 /* CommandLineInstallViewController.swift in Sources */,
-				719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */,
-				7162E1262097255C00081E4E /* Stack.swift in Sources */,
-				71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */,
-				714AB65F22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift in Sources */,
-				71012FAC230C928600FDF8ED /* CmdLine.swift in Sources */,
-				71AE37EF23776AFB009C03BB /* FileManager+DateProperties.swift in Sources */,
-				719B25D9205ECA53007560C0 /* Version.swift in Sources */,
-				71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */,
-				715E8C3D216566FD0059A2E5 /* Weak.swift in Sources */,
-				717A3EC928FC3DDC002A0C8F /* DocumentationCacheFileEntry.swift in Sources */,
-				717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */,
-				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
-				71A2C1202668FB1200F502A0 /* FeedbackMailer.swift in Sources */,
-				71012FA9230C8A9E00FDF8ED /* main.swift in Sources */,
-				7162E12D209905BC00081E4E /* Preferences.swift in Sources */,
-				7162E12420966D1500081E4E /* CleaningViewController.swift in Sources */,
-				7110B4942030F17B00EDBFA3 /* MainViewController.swift in Sources */,
-				71B01E902082551000940041 /* SizeCellView.swift in Sources */,
-				71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */,
-				7162E12B209901FB00081E4E /* PreferencesViewController.swift in Sources */,
-				712F99A020D6810A003927BC /* MessageView.swift in Sources */,
-				7155325E2061AFD80025EB75 /* Logger.swift in Sources */,
-				71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */,
-				71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */,
-				7140B617231A81DC005768A7 /* ReviewRequests.swift in Sources */,
-				7100BEE222F6E771002E82B2 /* Signposts.swift in Sources */,
-				716667D0221A26BA004D4FC4 /* FileManager+HomeFolder.swift in Sources */,
-				718D4ABE23140ABA001E9382 /* Files.swift in Sources */,
-				7100BEE322F6E771002E82B2 /* Profiler.swift in Sources */,
-				71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */,
-				7169D2B027B32A8E00882E03 /* Digest+Helpers.swift in Sources */,
-				7140B61F2323E1F7005768A7 /* HelpViewController.swift in Sources */,
-				717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */,
-				712F999E20D65229003927BC /* Donations.swift in Sources */,
-				710C965427BBE09200A1DA6A /* AppleBuild.swift in Sources */,
-				7185E5D320D0775200C1C918 /* DonationViewController.swift in Sources */,
-				7110B4922030F17B00EDBFA3 /* AppDelegate.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		7110B4972030F17B00EDBFA3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7110B4982030F17B00EDBFA3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7110B49C2030F17B00EDBFA3 /* Debug configuration for PBXProject "Ultimate Xcode Cleaner" */ = {
@@ -565,6 +253,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -621,6 +310,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -636,7 +326,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 0;
 				DEAD_CODE_STRIPPING = YES;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
 				INFOPLIST_FILE = "$(SRCROOT)/DevCleaner/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Xcode Cleaner";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
@@ -662,7 +355,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 0;
 				DEAD_CODE_STRIPPING = YES;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
 				INFOPLIST_FILE = "$(SRCROOT)/DevCleaner/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Xcode Cleaner";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
