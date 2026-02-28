@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 100;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -113,7 +113,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 2630;
+				LastUpgradeCheck = 2640;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					7110B48D2030F17B00EDBFA3 = {
@@ -142,7 +142,7 @@
 				Base,
 			);
 			mainGroup = 7110B4852030F17B00EDBFA3;
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 100;
 			productRefGroup = 7110B48F2030F17B00EDBFA3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
