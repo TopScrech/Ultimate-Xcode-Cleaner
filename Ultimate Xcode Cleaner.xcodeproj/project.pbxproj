@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 100;
+	objectVersion = 110;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,7 @@
 		7164260B20B8903000D47EF2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		718788E220E9169D007375AA /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		71AE37F0237A1FAE009C03BB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		F3ED4B4330573E4200B6F884 /* AGENTS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AGENTS.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -59,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				7164260420ACE2EC00D47EF2 /* README.md */,
+				F3ED4B4330573E4200B6F884 /* AGENTS.md */,
 				F3C1DD662F497ABD00D3D257 /* DevCleaner */,
 				718788E220E9169D007375AA /* LICENSE */,
 				7110B48F2030F17B00EDBFA3 /* Products */,
@@ -113,7 +115,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 2650;
+				LastUpgradeCheck = 2700;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					7110B48D2030F17B00EDBFA3 = {
@@ -142,7 +144,7 @@
 				Base,
 			);
 			mainGroup = 7110B4852030F17B00EDBFA3;
-			preferredProjectObjectVersion = 100;
+			preferredProjectObjectVersion = 110;
 			productRefGroup = 7110B48F2030F17B00EDBFA3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -339,7 +341,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13;
 				MARKETING_VERSION = 2.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.topscrech.Ultimate-Xcode-Cleaner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -368,7 +370,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13;
 				MARKETING_VERSION = 2.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.topscrech.Ultimate-Xcode-Cleaner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
